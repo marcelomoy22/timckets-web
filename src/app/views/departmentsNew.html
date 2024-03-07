@@ -1,0 +1,52 @@
+<h1> {{ title }} </h1>
+
+<section class="row" id="main-content">
+    <div class="col-xs-12">
+
+<div class="panel panel-default">
+<div class="panel-body">
+
+<form #departmentNewForm="ngForm" (ngSubmit)="onSubmitNew()" class="col-md-10">
+
+<div class="col-lg-6">
+
+<div class="col-md-12" style="margin-top: 15px;">
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;">Nombre:</label>
+    <div class="col-md-8">
+        <input type="text" class="form-control"  #name="ngModel" name="names" [(ngModel)]="names" required/>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-md-12" style="margin-top: 15px;">
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;">Abreviatura:</label>
+    <div class="col-md-8">
+        <input type="text" class="form-control"  #name="ngModel" name="shortName" [(ngModel)]="shortName" required/>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-md-12" style="margin-top: 15px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;">Responsable:</label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="responsable" [(ngModel)]="responsable" >
+            <option value="">▼</option>
+            <option *ngFor="let usersAdmin of usersAdmins; let i = index" value={{usersAdmin._id}}>{{usersAdmin.fname}} {{usersAdmin.lname}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div style="text-align: center; margin-top: 50px; margin-bottom: 15px; text-align: start;">
+    <input type="submit" value="Guardar" class="btn btn-primary"/>
+</div>
+<div class="clearfix"></div> 
+
+</div>
+    </form>
+
+
+</div>
+</div>
+</div>
+</section>

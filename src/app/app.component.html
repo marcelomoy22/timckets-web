@@ -1,0 +1,1012 @@
+<!-------------------------------------------------------------
+-------------******* Vista de Sucursal GRANDE *******------------
+--------------------------------------------------------------->
+<div *ngIf="identity && message =='Sucursal' && medida=='grande'" class="navigation col-lg-2">
+<div class="color">
+  <div class="color-top"></div>
+  <div style="text-align: center; margin-top: -5px;">
+    <img src="{{'https://dev-soporte.timhortonsmx.com/img/hojamapple.png'}}" class="avatar" alt="Imagen" style="margin-top:-10px; height: 100px; width: 100px">
+    </div>
+  <h1 class="head-title">
+    <a id="titulo" style="height: 30px; margin-left: -20px;" [routerLink]="['/home']">
+      <img src="{{'https://dev-soporte.timhortonsmx.com/img/logotimckets.png'}}" class="logo-gray" alt="Imagen" style="width: 220px; height: 50px; margin-top: -25px;">
+    </a>
+  </h1>
+</div>
+
+  <nav>
+    <a class="textos" [routerLink]="['/home']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 9%; height: 56px; font-family: 'sofia-pro'; font-size: 105%;">
+      <svg style="margin-top: -4%; margin-left: 15px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+      </svg>
+      Inicio
+    </a>
+    <a class="textos" [routerLink]="['/requestNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 7%;  height: 56px; font-family: 'sofia-pro'; font-size: 105%;">
+      <span style="margin-left: 15px" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      Nuevo Requerimiento
+    </a>
+    <a class="textos" [routerLink]="['/requestProces']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 5%; height: 56px; font-family: 'sofia-pro'; font-size: 105%;">
+      <svg style="margin-left: 15px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+        <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+      </svg>
+    Requerimientos en
+    <div style="margin-left: 23%;">
+      Proceso
+    </div>
+  </a>
+    <a class="textos" [routerLink]="['/answer']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 7%; height: 56px; font-family: 'sofia-pro'; font-size: 105%;">
+      <span style="margin-left: 15px" class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+      Preguntas y Respuestas
+    </a>
+    <a class="textos" [routerLink]="['/requestClosed']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 4%; height: 58px; font-family: 'sofia-pro'; font-size: 105%;">
+        <span style="margin-left: 15px" class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+      Requerimientos
+      <div style="margin-left: 23%;">
+        solucionados
+      </div>
+    </a>
+    
+
+  </nav>
+
+  <div>
+    <nav id="user_logged">
+      <div style="margin-top: 2px;">
+    <span class="btn" style="color: #3F2021; background-color: #DDCBA4" (click)="logout()" [routerLink]="['/']">
+      Cerrar sesion
+    </span>
+    <a style="margin-top: 17px; color:#DDCBA4" [routerLink]="['/usersEdit']" [routerLinkActive]="['actived']">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+      {{identity.name}}
+    </a>
+    <div style="margin-left: 15px;">
+      <img src="{{'https://dev-soporte.timhortonsmx.com/img/logocafe.png'}}" class="logo-gray" alt="Imagen">
+    </div>
+      </div>
+    </nav>
+  </div>
+
+</div>
+
+<div class="col-lg-2" *ngIf="identity && message =='Sucursal' && medida=='grande'">
+</div>
+
+<div *ngIf="identity && message =='Sucursal' && medida=='grande'"  class="col-lg-10" id="contenido">
+  <router-outlet></router-outlet>
+</div>
+
+<div  *ngIf="identity && message =='Sucursal' && medida=='grande'" class="clearfix"></div>
+
+<!-----******* Cierre de Vista de Sucursal GRANDE *************************----->
+
+
+<!-------------------------------------------------------------
+-------------******* Vista de Sucursal CHICO *******------------
+--------------------------------------------------------------->
+
+<div *ngIf="identity && message =='Sucursal' && medida=='chica'" class="navsup2 col-lg-12">
+ 
+  <div>
+    <button type="button" class="btn btn-link" style="color: white; width: 60px; margin-top: -22px;" (click)="menus()">
+      <div>
+      <h3><span class="glyphicon glyphicon-menu-hamburger"></span></h3>
+    </div>
+  
+    </button>
+   </div>
+
+   <div style=" margin-left: 70px; margin-top: -58px;">
+    <img src="{{'https://dev-soporte.timhortonsmx.com/img/logotimckets.png'}}" class="logo-gray" alt="Imagen" style="width: 200px; height: 50px;">
+   </div>
+   
+ </div>
+
+
+ <div *ngIf="identity && message =='Sucursal' && medida=='chica' && menu==true" class="navigation2 col-lg-2" style="position: initial;">
+  <div class="color">
+    <div class="color-top"></div>
+
+    <h1 class="head-title">
+      <a id="titulo" style="height: 9px;" [routerLink]="['/home']">
+      </a>
+    </h1>
+  </div>
+  
+    <nav>
+      <a class="textos" (click)="menus()" [routerLink]="['/home']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 12px; height: 40px;">
+        <svg style="margin-top: -2%; margin-left: 15px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </svg>
+        Inicio
+      </a>
+      <a class="textos" (click)="menus()" [routerLink]="['/requestNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 12px;  height: 45px;">
+        <span style="margin-left: 15px ; margin-top: -2%;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Nuevo Requerimiento
+      </a>
+      <a class="textos" (click)="menus()" [routerLink]="['/requestProces']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 12px; height: 45px;">
+        <svg style="margin-left: 15px; margin-top: -2%;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+          <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        </svg>
+      Requerimientos en Proceso
+    </a>
+      <a class="textos" (click)="menus()" [routerLink]="['/answer']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 12px; height: 45px;">
+        <span style="margin-left: 15px ; margin-top: -2%;" class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+        Preguntas y Respuestas
+      </a>
+      <a class="textos" (click)="menus()" [routerLink]="['/requestClosed']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 13px; height: 45px;">
+          <span style="margin-left: 15px ; margin-top: -1%;" class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        Requerimientos solucionados
+      </a>
+      
+  
+    </nav>
+  
+    <div>
+      <nav id="user_logged2">
+        <div style="margin-top: 2px;">
+      <span style="text-align: center;">
+        {{identity.name}}
+      </span>
+      <span class="btn" style="color: #3F2021; background-color: #DDCBA4" (click)="logout()" [routerLink]="['/']">
+        Cerrar sesion
+      </span>
+      <a style="margin-top: 17px; color: #DDCBA4" (click)="menus()"  [routerLink]="['/usersEdit']" [routerLinkActive]="['actived']">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+        </svg>
+        Mis datos
+      </a>
+      <div style="margin-left: 0px;">
+        <img src="{{'https://dev-soporte.timhortonsmx.com/img/logocafe.png'}}" class="logo-gray" alt="Imagen">
+      </div>
+        </div>
+      </nav>
+    </div>
+  
+  </div>
+
+  <div class="col-lg-2" *ngIf="identity && message =='Sucursal' && medida=='chica'">
+  </div>
+  
+  <div *ngIf="identity && message =='Sucursal' && medida=='chica'"  class="col-lg-10" style="margin-top: 10%;" id="contenido">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <div  *ngIf="identity && message =='Sucursal' && medida=='chica'" class="clearfix"></div>
+  
+  <!-----******* Cierre de Vista de Sucursal CHICO *************************----->
+  
+
+
+<!-------------------------------------------------------------
+-------------******* Vista de Administrador GRANDE *******------------
+--------------------------------------------------------------->
+
+<div *ngIf="identity && medida=='grande' && (message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor'  || message =='CallCenter') " class="navigation0 col-lg-12">
+ <div class="navsup col-lg-12" >
+   <div style="text-align: end; margin-left: 4%; padding-top: 0.6%;" class="col-lg-3">
+   </div>
+
+   <div style="text-align: start;" class="col-lg-2" >
+    <div *ngIf="identity.type!='proveedor'">
+    <button type="button" class="btn btn-link" style="color: #ffffff; text-decoration: none;" [routerLink]="['/messageAdmin']">
+      <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+          </svg>
+          {{dataResponseAdmin.length}}
+    </div>
+  
+
+      </button>
+    </div>
+    <div style="margin-left: -8%;" *ngIf="identity.type=='proveedor'">
+      <button type="button" class="btn btn-link" style="color: #ffffff;">
+        <div style="margin-top: -50%;">
+      </div>
+        </button>
+      </div>
+   </div>
+
+   <div *ngIf="nameText.length<=12" style="text-align: end;" class="col-lg-6">
+      <label (click)="prfile()" >
+
+        <div class="col-md-1" style="margin-top: 6%;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+            <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+          </svg>
+        </div>  
+
+        <div class="col-md-12" style="margin-top: -11.6%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+          {{nameText}}
+        </div>      
+       </label>
+
+      <button type="button" class="btn btn-link" style="margin-top: -3.3%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+        <div style="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+            <path d="M7.5 1v7h1V1h-1z"/>
+            <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+          </svg>
+      </div>
+      </button>
+  </div>
+
+  <div *ngIf="nameText.length>=13 && nameText.length<=17" style="text-align: end;" class="col-lg-6">
+    <label (click)="prfile()" >
+
+      <div class="col-md-1" style="margin-top: 6%;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+        </svg>
+      </div>  
+
+      <div class="col-md-12" style="margin-top: -12%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+        {{nameText}}
+      </div>      
+     </label>
+
+    <button type="button" class="btn btn-link" style="margin-top: -3.3%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+      <div style="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+          <path d="M7.5 1v7h1V1h-1z"/>
+          <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+        </svg>
+    </div>
+    </button>
+</div>
+
+<div *ngIf="nameText.length>=18 && nameText.length<=23" style="text-align: end;" class="col-lg-6">
+  <label (click)="prfile()" >
+
+    <div class="col-md-1" style="margin-top: 5%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+    </div>  
+
+    <div class="col-md-12" style="margin-top: -9%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+      {{nameText}}
+    </div>      
+   </label>
+
+  <button type="button" class="btn btn-link" style="margin-top: -3.3%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+    <div style="">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <path d="M7.5 1v7h1V1h-1z"/>
+        <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+      </svg>
+  </div>
+  </button>
+</div>
+
+<div *ngIf="nameText.length>=24 && nameText.length<=29" style="text-align: end;" class="col-lg-6">
+  <label (click)="prfile()" >
+
+    <div class="col-md-1" style="margin-top: 4.5%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+    </div>  
+
+    <div class="col-md-12" style="margin-top: -8.4%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+      {{nameText}}
+    </div>      
+   </label>
+
+  <button type="button" class="btn btn-link" style="margin-top: -3.3%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+    <div style="">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <path d="M7.5 1v7h1V1h-1z"/>
+        <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+      </svg>
+  </div>
+  </button>
+</div>
+
+<div *ngIf="nameText.length>=30 && nameText.length<=35" style="text-align: end;" class="col-lg-6">
+  <label (click)="prfile()" >
+
+    <div class="col-md-1" style="margin-top: 3.6%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+    </div>  
+
+    <div class="col-md-12" style="margin-top: -6.9%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+      {{nameText}}
+    </div>      
+   </label>
+
+  <button type="button" class="btn btn-link" style="margin-top: -3.3%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+    <div style="">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <path d="M7.5 1v7h1V1h-1z"/>
+        <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+      </svg>
+  </div>
+  </button>
+</div>
+
+<div *ngIf="nameText.length>=36 && nameText.length<=49" style="text-align: end;" class="col-lg-6">
+  <label (click)="prfile()" >
+
+    <div class="col-md-1" style="margin-top: 3%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+    </div>
+
+    <div class="col-md-12" style="margin-top: -5.4%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+      {{nameText}}
+    </div>
+   </label>
+
+  <button type="button" class="btn btn-link" style="margin-top: -3.6%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+    <div style="">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <path d="M7.5 1v7h1V1h-1z"/>
+        <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+      </svg>
+  </div>
+  </button>
+</div>
+
+<div *ngIf="nameText.length>=50 && nameText.length<=60" style="text-align: end;" class="col-lg-6">
+  <label (click)="prfile()" >
+
+    <div class="col-md-1" style="margin-top: 2.3%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+    </div>  
+
+    <div class="col-md-12" style="margin-top: -4.5%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+      {{nameText}}
+    </div>      
+   </label>
+
+  <button type="button" class="btn btn-link" style="margin-top: -3.6%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+    <div style="">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <path d="M7.5 1v7h1V1h-1z"/>
+        <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+      </svg>
+  </div>
+  </button>
+</div>
+
+<div *ngIf="nameText.length>=61" style="text-align: end;" class="col-lg-6">
+  <label (click)="prfile()" >
+
+    <div class="col-md-1" style="margin-top: 1.9%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+    </div>  
+
+    <div class="col-md-12" style="margin-top: -3.9%; text-align: end; font-family: 'sofia-pro'; font-size: 90%;">
+      {{nameText}}
+    </div>      
+   </label>
+
+  <button type="button" class="btn btn-link" style="margin-top: -3.6%; margin-right: -13%; color: #ffffff;" (click)="logout()" [routerLink]="['/']">
+    <div style="">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <path d="M7.5 1v7h1V1h-1z"/>
+        <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+      </svg>
+  </div>
+  </button>
+</div>
+
+
+  <div class="clearfix"></div>
+
+  </div>
+
+</div>
+
+<div *ngIf="identity && medida=='grande' && (message =='Administrador'|| message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter') " class="navigation col-lg-2">
+  <!-- <div style="background-color: #bd1327; margin-top: -10%; margin-left: -6%; height:6%; width: 700%;">
+    <div class="color">
+    </div>
+      <h3 style="margin-left: 3.5%; padding-top: 0.5%; color: white;">
+        Timckets 2.0
+      </h3>
+
+  </div> -->
+  <div class="color2">
+    <div style="margin-top: -5px;">
+        <img src="{{'https://dev-soporte.timhortonsmx.com/img/logotimckets.png'}}" class="logo-gray" alt="Imagen" style="width: 200px; height: 50px;">
+    </div>
+    <!-- <h3 style="margin-left: 17%; margin-top: 1.5%; color: white;">
+      Timckets 2.0
+    </h3> -->
+  </div>
+
+  
+    <nav style="margin-top: 40%;">
+      <a class="textos" [routerLink]="['/homeAdmin']" [routerLinkActive]="['actived']" (click)="clickNav=''" style="margin-left: -15px; padding-top: 7%; font-family: 'sofia-pro'; font-size: 105%;">
+        <svg style="margin-top: -7px; margin-left: 15px;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </svg>
+        Inicio
+      </a>
+      <a class="textos" (click)="clickNav='misTimckets'" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+        <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Mis Timckets
+      </a>
+      <div *ngIf="clickNav=='misTimckets'"  style="text-align: start; margin-left: 12%;">
+        <a class="textos" [routerLink]="['/requestProces']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+          <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          Asignados a Mí
+        </a>
+        <a class="textos" [routerLink]="['/requestClosed']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+          <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          Cerrados
+        </a>
+        <a class="textos" [routerLink]="['/report']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+          <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          Resumen Depto
+        </a>
+        <a class="textos" [routerLink]="['/requestNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+          <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          Nuevo Requerimiento
+        </a>
+      </div>
+      <a class="textos" [routerLink]="['/messageAdmin']" [routerLinkActive]="['actived']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 7%; font-family: 'sofia-pro'; font-size: 105%;">
+        <svg style="margin-top: -4.5%; margin-left:15px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+          <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        </svg>
+      Notificaciones
+    </a>
+      <a class="textos" (click)="clickNav=''" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+        <span style="margin-left: 15px;" class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+        Perfil
+      </a>
+      <a class="textos" *ngIf="identity.type!='proveedor'" (click)="clickNav='crear'" style="margin-left: -15px; padding-top: 5%; height: 55px; font-family: 'sofia-pro'; font-size: 105%;">
+        <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Creación de 
+        <div style="margin-left: 23%;">
+          Información
+        </div>
+      </a>
+          <div *ngIf="clickNav=='crear' && identity.email!='mgj@timhortonsmx.com'"  style="text-align: star; margin-left: 12%;">
+            <a class="textos" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <svg style="margin-left: 9px;" xmlns="http://www.w3.org/2000/svg" fill="currentColor"  aria-hidden="true" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+              </svg>                Crear Usuarios
+            </a>
+            <a class="textos" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Crear de Áreas
+            </a>
+            <a class="textos" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Crear Departamentos
+            </a>
+            <a class="textos" *ngIf="identity.type=='superAdmin' || identity.type=='admin' " [routerLink]="['/issuesNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Crear Servicios
+            </a>
+            <a class="textos" *ngIf="identity.type=='superAdmin' || identity.type=='admin' " [routerLink]="['/answerNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Preguntas/Respuestas
+            </a>
+          </div>
+
+          <div *ngIf="clickNav=='crear' && identity.email=='mgj@timhortonsmx.com'"  style="text-align: star; margin-left: 12%;">
+            <a class="textos" [routerLink]="['/usersNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <svg style="margin-left: 9px;" xmlns="http://www.w3.org/2000/svg" fill="currentColor"  aria-hidden="true" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+              </svg>                Crear Usuarios
+            </a>
+            <a class="textos" [routerLink]="['/areasNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Crear de Áreas
+            </a>
+            <a class="textos" [routerLink]="['/departmentsNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Crear Departamentos
+            </a>
+            <a class="textos" [routerLink]="['/issuesNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Crear Servicios
+            </a>
+            <a class="textos" [routerLink]="['/answerNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+              <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              Preguntas/Respuestas
+            </a>
+          </div>
+
+          <a class="textos" (click)="clickNav='editar'" style="margin-left: -15px; padding-top: 5%; height: 55px; font-family: 'sofia-pro'; font-size: 105%;">
+            <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            Editar 
+            <div style="margin-left: 23%;">
+              Información
+            </div>
+          </a>
+            <div *ngIf="clickNav=='editar'"  style="text-align: start; margin-left: 12%;">
+              <a class="textos" [routerLink]="['/usersEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+                <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                Editar Usuarios
+              </a>
+              <a class="textos" *ngIf="identity.type!='proveedor'" [routerLink]="['/localsEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+                <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                Editar Sucursales
+              </a>
+              <a class="textos" *ngIf="identity.type!='proveedor'" [routerLink]="['/areasEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+                <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                Editar de Áreas
+              </a>
+              <a class="textos" *ngIf="identity.type!='proveedor'" [routerLink]="['/departmentsEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+                <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                Editar Departamentos
+              </a>
+              <a class="textos" *ngIf="identity.type!='proveedor'" [routerLink]="['/issuesEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 6%; font-family: 'sofia-pro'; font-size: 105%;">
+                <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                Editar Servicios
+              </a>
+            </div>
+
+            <a class="textos" *ngIf="identity.type=='superAdmin'|| identity.history=='si'" [routerLink]="['/history']" [routerLinkActive]="['actived']" (click)="clickNav=''" style="margin-left: -15px; padding-top: 7%; font-family: 'sofia-pro'; font-size: 105%;">
+            <i style="margin-left: 15px;" class="w3-xxxlarge glyphicon glyphicon-menu-hamburger"></i>
+              Historial
+            </a>
+  
+    </nav>
+  
+    <div>
+      <nav id="user_logged">
+        <div style="margin-top: 1px; margin-left: 15px;">
+      <img src="{{'https://dev-soporte.timhortonsmx.com/img/logocafe.png'}}" class="logo-gray" alt="Imagen">
+        </div>
+      </nav>
+    </div>
+  
+  </div>
+  
+  <div class="col-lg-2" *ngIf="identity && (medida=='grande' && message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter')">
+  </div>
+
+
+<div *ngIf="identity && medida=='grande' && (message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter')"  class="col-lg-10" id="contenido" style="margin-top: 2%;">
+
+  <router-outlet></router-outlet>
+</div>
+
+<div  *ngIf="identity && medida=='grande' && (message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter')" class="clearfix"></div>
+<!-----******* Cierre de Vista de Administrador GRANDE *************************----->
+
+
+
+
+
+
+<!-------------------------------------------------------------
+-------------******* Vista de Administrador CHICA *******------------
+---------------------------------------------------------------> 
+<div *ngIf="identity && medida=='chica' && (message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor'  || message =='CallCenter') " class="navsup2 col-lg-12" style="margin-top: -1px;">
+ 
+  <div>
+    <button type="button" class="btn btn-link" style="color: #ffffff; width: 60px; margin-top: -22px;" (click)="menus()">
+      <div>
+      <h3><span class="glyphicon glyphicon-menu-hamburger"></span></h3>
+    </div>
+  
+    </button>
+   </div>
+
+   <div style=" margin-left: 40px; margin-top: -58px;">
+      <img src="{{'https://dev-soporte.timhortonsmx.com/img/logotimckets.png'}}" class="logo-gray" alt="Imagen" style="width: 200px; height: 50px;">
+   </div>
+
+   <div class="col-md-12"  style=" text-align: end; margin-left: 240px; margin-top: -34px; width: 40%;">
+    {{identity.fname}}
+
+    <button type="button" class="btn btn-link" style="color: #ffffff; margin-top: -5%; margin-left: -13px;" (click)="logout()" [routerLink]="['/']">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+          <path d="M7.5 1v7h1V1h-1z"/>
+          <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+        </svg>
+    </div>
+    </button>
+  </div>  
+   
+ </div>
+
+
+
+ <div *ngIf="identity && medida=='chica' && menu==true && (message =='Administrador'|| message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter') " class="navigation2 col-lg-2"  style="position: initial; height: 90%;">
+  <div class="color">
+    <div class="color-top"></div>
+
+    <h1 class="head-title">
+      <a id="titulo" style="height: 0px;" [routerLink]="['/homeAdmin']">
+      </a>
+    </h1>
+  </div>
+
+     <nav>
+
+      <a class="textos" [routerLink]="['/homeAdmin']" [routerLinkActive]="['actived']" (click)="menus(clickNav='')" style="margin-left: -15px; padding-top: 12px; height: 40px;">
+        <svg style="margin-top: -2%; margin-left: 15px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </svg>
+        Inicio
+      </a>
+
+       <a class="textos" (click)="clickNav='misTimckets'" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+         <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+         Mis Timckets
+       </a>
+       <div *ngIf="clickNav=='misTimckets'" (click)="menus()"  style="text-align: start; margin-left: 12%;">
+         <a class="textos" [routerLink]="['/requestProces']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+           <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+           Asignados a Mí
+         </a>
+         <a class="textos" [routerLink]="['/requestClosed']" (click)="menus()" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+           <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+           Cerrados
+         </a>
+         <a class="textos" [routerLink]="['/report']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;" (click)="menus()">
+           <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+           Resumen Depto
+         </a>
+         <a class="textos" [routerLink]="['/requestNew']" (click)="menus()" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+           <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+           Nuevo Requerimiento
+         </a>
+       </div>
+       <a class="textos" [routerLink]="['/messageAdmin']" [routerLinkActive]="['actived']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+         <svg style="margin-top: -0.5%; margin-left:15px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+           <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+         </svg>
+       Notificaciones
+     </a>
+       <a class="textos" (click)="menus(clickNav='')" [routerLink]="['/usersEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+         <span style="margin-left: 15px;" class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+         Perfil
+       </a>
+       <a class="textos" *ngIf="identity.type!='proveedor'" (click)="clickNav='crear'" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+         <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+         Creación de Información
+       </a>
+           <div *ngIf="clickNav=='crear' && identity.email!='mgj@timhortonsmx.com'"  style="text-align: star; margin-left: 12%;">
+             <a class="textos" (click)="menus()" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <svg style="margin-left: 9px;" xmlns="http://www.w3.org/2000/svg" fill="currentColor"  aria-hidden="true" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                 <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                 <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+               </svg>                Crear Usuarios
+             </a>
+             <a class="textos" (click)="menus()" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Crear de Áreas
+             </a>
+             <a class="textos" (click)="menus()" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Crear Departamentos
+             </a>
+             <a class="textos" (click)="menus()" *ngIf="identity.type=='superAdmin' || identity.type=='admin' " [routerLink]="['/issuesNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Crear Servicios
+             </a>
+             <a class="textos" (click)="menus()" *ngIf="identity.type=='superAdmin' || identity.type=='admin' " [routerLink]="['/answerNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Preguntas/Respuestas
+             </a>
+           </div>
+ 
+           <div *ngIf="clickNav=='crear' && identity.email=='mgj@timhortonsmx.com'"  style="text-align: star; margin-left: 12%;">
+             <a class="textos" (click)="menus()" [routerLink]="['/usersNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <svg style="margin-left: 9px;" xmlns="http://www.w3.org/2000/svg" fill="currentColor"  aria-hidden="true" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                 <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                 <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+               </svg>                Crear Usuarios
+             </a>
+             <a class="textos" (click)="menus()" [routerLink]="['/areasNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Crear de Áreas
+             </a>
+             <a class="textos" (click)="menus()" [routerLink]="['/departmentsNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Crear Departamentos
+             </a>
+             <a class="textos" (click)="menus()" [routerLink]="['/issuesNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Crear Servicios
+             </a>
+             <a class="textos" (click)="menus()" [routerLink]="['/answerNew']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+               <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+               Preguntas/Respuestas
+             </a>
+           </div>
+ 
+           <a class="textos" (click)="clickNav='editar'" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+             <span style="margin-left: 15px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+             Editar Información
+           </a>
+             <div *ngIf="clickNav=='editar'"  style="text-align: start; margin-left: 12%;">
+               <a class="textos" (click)="menus()" [routerLink]="['/usersEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+                 <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                 Editar Usuarios
+               </a>
+               <a class="textos" (click)="menus()" *ngIf="identity.type!='proveedor'" [routerLink]="['/localsEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+                 <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                 Editar Sucursales
+               </a>
+               <a class="textos" (click)="menus()" *ngIf="identity.type!='proveedor'" [routerLink]="['/areasEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+                 <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                 Editar de Áreas
+               </a>
+               <a class="textos" (click)="menus()" *ngIf="identity.type!='proveedor'" [routerLink]="['/departmentsEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+                 <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                 Editar Departamentos
+               </a>
+               <a class="textos" (click)="menus()" *ngIf="identity.type!='proveedor'" [routerLink]="['/issuesEdit']" [routerLinkActive]="['actived']" style="margin-left: -15px; padding-top: 11px; height: 40px;">
+                 <span style="margin-left: 9px;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                 Editar Servicios
+               </a>
+             </div>
+ 
+             <a class="textos" *ngIf="identity.type=='superAdmin'|| identity.history=='si'" [routerLink]="['/history']" [routerLinkActive]="['actived']" (click)="menus(clickNav='')"  style="margin-left: -15px; padding-top: 11px; height: 40px;">
+             <i style="margin-left: 15px;" class="w3-xxxlarge glyphicon glyphicon-menu-hamburger"></i>
+               Historial
+             </a>
+   
+     </nav>
+   
+     <div>
+       <nav id="user_logged2">
+         <div style="margin-left: 15px; margin-top: 10px;">
+          <img src="{{'https://dev-soporte.timhortonsmx.com/img/logocafe.png'}}" class="logo-gray" alt="Imagen">
+        </div>
+       </nav>
+     </div>
+   
+   </div>
+   
+   <div class="col-lg-2" *ngIf="identity && medida=='chica' && (message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter')">
+   </div>
+ 
+ 
+ <div *ngIf="identity && medida=='chica' && (message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter')"  class="col-lg-10" id="contenido" style="margin-top: 10%;">
+   <router-outlet></router-outlet>
+ </div>
+ 
+ <div  *ngIf="identity && medida=='chica' && (message =='Administrador' || message =='Super-Admin' || message =='Area-Manager' || message =='Proveedor' || message =='CallCenter')" class="clearfix"></div>
+
+ <!-----******* Cierre de Vista de Administrador CHICA *************************----->
+ 
+
+
+
+
+
+
+
+
+<div *ngIf="!identity && changePass==false" class="col-lg-12">
+    
+  <div class="login-box">
+    <img src="{{'https://dev-soporte.timhortonsmx.com/img/logo-short.jpeg'}}" class="avatar" alt="Imagen">
+    <h1 style="font-family: 'sofia-pro'; font-size: 190%; font-weight:520;">Timckets</h1>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <!-- USERNAME INPUT -->
+      <label for="username" style="font-family: 'sofia-pro'; font-size: 110%; font-weight:510; margin-top: -3px;">Usuario ó email</label>
+      <input type="text" #email="ngModel" name="email" [(ngModel)]="users.email" placeholder="Ingresar usuario ó email">
+      <!-- PASSWORD INPUT -->
+      <label for="password" style="font-family: 'sofia-pro'; font-size: 110%; font-weight:510;">Contraseña</label>
+      <input type="password" #password="ngModel" name="password" [(ngModel)]="users.password" placeholder="Ingresar contraseña">
+      <input style="margin-top: 6px; font-family: 'sofia-pro'; font-size: 130%; font-weight:400;" type="submit" value="Ingresar">
+      <a href="#" (click)="resumePasword()" style="margin-top: 5%; font-family: 'sofia-pro'; font-size: 90%; font-weight:420;">Restablecer contraseña</a>
+    </form>
+  </div>
+  <div class="clearfix"></div>
+
+</div>
+
+<div *ngIf="!identity && changePass==true" class="col-lg-12">
+  <div class="card" style="height: 100%; margin-left: 25%; margin-right: 25%; margin-top: 1%;">
+    <div class="card-body">
+        <div class="row">
+          <h2 style="text-align: center;"> Cambio de contraseña</h2>
+            <form #userUpdateForm="ngForm" (ngSubmit)="onSubmitChangePass()" class="col-md-10">
+                <div class="col-lg-12">
+                    <div style="margin-top: 30px ;margin-bottom: 5%;">
+                        <div class="col-md-12" style="margin-top: 30px;">
+                            <label class="col-md-4" style="text-align: right;">Nueva contraseña:</label>
+                            <div class="col-md-7">
+                                <input type="password" #name="ngModel" name="password" [(ngModel)]="password" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-12" style="margin-top: 30px;">
+                            <label class="col-md-4" style="text-align: right;">Nueva contraseña:</label>
+                            <div class="col-md-7">
+                                <input type="password" #name="ngModel" name="password2" [(ngModel)]="password2" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-11" style="margin-top: 30px ;margin-bottom: 5%; text-align: center;">
+                            <span class="btn btn-primary" (click)="changePassword2()" >
+                                Cambiar contraseña
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+</div>
+
+<footer >
+  <div *ngIf="!identity && changePass==false" style="position: fixed; bottom: 3px; left: 1%;">
+    <p style="font-size: 90%; color: #3F2021">{{version}}</p>
+  </div>
+  <div *ngIf="!identity && changePass==false" style="position: fixed; bottom: 3px; right: 1%; color: #3F2021">
+    <p >Timckets 2023 Ⓜ</p>
+  </div>
+</footer>
+
+  <div *ngIf="identity && medida=='grande'" style="position: fixed; bottom: 3px; left: 1%;">
+    <p style="font-size: 90%; color: #DDCBA4">{{version}}</p>
+  </div>
+  <div *ngIf="identity && medida=='chica'" style="position: fixed; bottom: 3px; left: 1%;">
+    <p style="font-size: 90%; color: #3F2021">{{version}}</p>
+  </div>
+
+  <div *ngIf="identity" style="position: fixed; bottom: 3px; right: 1%; color: #3F2021">
+    <p >Timckets 2023 Ⓜ</p>
+  </div>
+
+<style>
+
+.textos{
+  color: #DDCBA4;
+}
+
+.actived{
+    background-color: #DDCBA4;
+    color: #3F2021;
+    width: 113%;
+}
+
+.login-box {
+  margin: auto;
+  text-align: center;
+  width: 310px;
+  height: 440px;
+  background: #DDCBA4;
+  color: #3F2021;
+  position: center;
+  box-sizing: border-box;
+  padding: 70px 30px;
+  margin-top: 120px;
+  border-radius: 20px
+}
+
+.login-box .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 40%;
+  position: absolute;
+  left: calc(50% - 50px);
+  overflow: hidden;
+  background-color: #C8102E;
+  margin-top: -120px;
+}
+
+.login-box h1 {
+  margin: 0;
+  padding: 0 0 25px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.login-box label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+  text-align: start;
+}
+
+.login-box input {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.login-box input[type="text"], .login-box input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #3F2021;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #3F2021;
+  font-size: 16px;
+}
+
+.login-box input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #C8102E;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.login-box input[type="submit"]:hover {
+  cursor: pointer;
+  background: #810707;
+  color: rgba(255, 255, 255, 0.979);
+}
+
+.login-box a {
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 20px;
+  color: #79311d;
+}
+
+.login-box a:hover {
+  color: rgb(12, 11, 11);
+}
+.logo-navi{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #C8102E;
+  margin-left: 37%;
+}
+.newImg{
+  color: rgb(165, 164, 164);
+  width: 80px;
+  height: 100px;
+}
+.color-top{
+  background-color: #C8102E;
+  margin-left: -10%;
+  width: 100%;
+  height: 15px;
+}
+
+
+.logo-gray{
+  width: 130px;
+  margin-left: 30px;
+}
+
+@import url("https://p.typekit.net/p.css?s=1&k=lkr2zif&ht=tk&f=24539.24540.24547&a=6178157&app=typekit&e=css");
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+  </style>

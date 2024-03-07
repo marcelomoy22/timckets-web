@@ -1,0 +1,660 @@
+<h1 *ngIf="identity.type!='local'" style="color:#DDCBA4; font-family: 'sofia-pro'; font-size: 240%; font-weight: 510" class="col-md-10">{{title}}</h1>
+<div class="clearfix"></div> 
+
+<section class="row" id="main-content">
+  <div class="col-xs-12">
+  
+    <div class="panel panel-default">
+      <div class="panel-body">
+  
+        <div class="col-lg-11">
+
+          <div class="col-md-6" style="margin-top: 15px;" >
+            <label class="col-md-4" style="text-align: right; margin-top: 5px;">Departamento: *</label>
+            <div class="col-md-8">
+                <select class="form-control" #name="ngModel" name="select" [(ngModel)]="newIssue.departments">
+                    <option value="">▼</option>
+                    <option *ngFor="let department of departments; let i = index" value={{department._id+coma+department.name}}>{{department.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-md-12" style="margin-top: 15px;">
+          <label class="col-md-2" style="text-align: right; margin-top: 5px;">Pregunta: *</label>
+          <div class="col-md-9">
+              <input type="text" class="form-control" #name="ngModel" name="select" [(ngModel)]="newIssue.issue"/>
+          </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="col-md-12" style="margin-top: 15px;">
+        <label class="col-md-2" style="text-align: right; margin-top: 5px;">Descripción de la pregunta:</label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" #name="ngModel" name="select" [(ngModel)]="newIssue.descIssue"/>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div *ngIf="!campo1" style="text-align: center; margin-top: 30px; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo1(campo1='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo1(campo1='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo1(campo1='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1=='texto'" class="col-md-12" style="margin-top: 30px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text1" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1=='imagen'" style="margin-top: 40px;">
+      <input *ngIf="!fileToUpload1" type="file" clas="btn btn-primary" (change)="fileChangeEvent1($event)">
+      
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload1">
+        <img style="height: 120px; width: 95px;"/>
+        <label style="text-align: left; margin-top: 5px;">{{newName1}}</label>
+        <button (click)="imgCancel1()" type="button" class="btn btn-secondary" > x </button>
+      </div>
+    </div>
+
+    <div *ngIf="campo1=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category1" (change)="searchCategory1(category.category1)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1=='hipervinculo' && category.category1" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service1" (change)="searchService1(serviceH.service1)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service1 of allService1; let i = index" value={{service1.issue}}>{{service1.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1=='hipervinculo' && serviceH.service1" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService1" (change)="searchService1(subService.subService1)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService1 of allSubService1; let i = index" value={{subService1.id}}>{{subService1.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="file" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo1(campo1=undefined)">X</button>
+    </div>
+
+    <div *ngIf="campo1 && !campo2" style="text-align: center; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo2(campo2='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo2(campo2='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo2(campo2='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2=='texto'" class="col-md-12" style="margin-top: 15px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text2" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1 && campo2=='imagen'">
+      <input *ngIf="!fileToUpload2" type="file" clas="btn btn-primary" placeholder="Sube imagen..." (change)="fileChangeEvent2($event)">
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload2">
+        <img style="height: 120px; width: 95px;"/>
+      <label *ngIf="fileToUpload2" style="text-align: left; margin-top: 5px;">{{newName2}}</label>
+      <button *ngIf="fileToUpload2" (click)="imgCancel2()" type="button" class="btn btn-secondary" > x </button>
+    </div>
+  </div>
+
+
+    <div *ngIf="campo1 && campo2=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category2" (change)="searchCategory2(category.category2)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1 && campo2=='hipervinculo' && category.category2" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service2" (change)="searchService2(serviceH.service2)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service2 of allService2; let i = index" value={{service2.issue}}>{{service2.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1 && campo2=='hipervinculo' && serviceH.service2" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService2" (change)="searchService2(subService.subService2)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService2 of allSubService2; let i = index" value={{subService2.id}}>{{subService2.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1 && campo2" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo2(campo2=undefined)">X</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && !campo3" style="text-align: center; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo3(campo3='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo3(campo3='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo3(campo3='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3=='texto'" class="col-md-12" style="margin-top: 15px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text3" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3=='imagen'">
+      <input *ngIf="!fileToUpload3" type="file" clas="btn btn-primary" placeholder="Sube imagen..." (change)="fileChangeEvent3($event)">
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload3">
+        <img style="height: 120px; width: 95px;"/>
+      <label *ngIf="fileToUpload3" style="text-align: left; margin-top: 5px;">{{newName3}}</label>
+      <button *ngIf="fileToUpload3" (click)="imgCancel3()" type="button" class="btn btn-secondary" > x </button>
+    </div>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category3" (change)="searchCategory3(category.category3)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1 && campo2 && campo3=='hipervinculo' && category.category3" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service3" (change)="searchService3(serviceH.service3)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service3 of allService3; let i = index" value={{service3.issue}}>{{service3.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1 && campo2 && campo3=='hipervinculo' && serviceH.service3" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService3" (change)="searchService3(subService.subService3)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService3 of allSubService3; let i = index" value={{subService3.id}}>{{subService3.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1 && campo2 && campo3" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo3(campo3=undefined)">X</button>
+    </div>
+    
+
+    <div *ngIf="campo1 && campo2 && campo3 && !campo4" style="text-align: center; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo4(campo4='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo4(campo4='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo4(campo4='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4=='texto'" class="col-md-12" style="margin-top: 15px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text4" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4=='imagen'">
+      <input *ngIf="!fileToUpload4" type="file" clas="btn btn-primary" placeholder="Sube imagen..." (change)="fileChangeEvent4($event)">
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload4">
+        <img style="height: 120px; width: 95px;"/>
+      <label *ngIf="fileToUpload4" style="text-align: left; margin-top: 5px;">{{newName4}}</label>
+      <button *ngIf="fileToUpload4" (click)="imgCancel4()" type="button" class="btn btn-secondary" > x </button>
+    </div>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category4" (change)="searchCategory4(category.category4)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1 && campo2 && campo3 && campo4=='hipervinculo' && category.category4" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service4" (change)="searchService4(serviceH.service4)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service4 of allService4; let i = index" value={{service4.issue}}>{{service4.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1 && campo2 && campo3 && campo4=='hipervinculo' && serviceH.service4" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService4" (change)="searchService4(subService.subService4)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService4 of allSubService4; let i = index" value={{subService4.id}}>{{subService4.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo4(campo4=undefined)">X</button>
+    </div>
+
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && !campo5" style="text-align: center; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo5(campo5='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo5(campo5='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo5(campo5='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5=='texto'" class="col-md-12" style="margin-top: 15px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text5" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5=='imagen'">
+      <input *ngIf="!fileToUpload5" type="file" clas="btn btn-primary" placeholder="Sube imagen..." (change)="fileChangeEvent5($event)">
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload5">
+        <img style="height: 120px; width: 95px;"/>
+      <label *ngIf="fileToUpload5" style="text-align: left; margin-top: 5px;">{{newName5}}</label>
+      <button *ngIf="fileToUpload5" (click)="imgCancel5()" type="button" class="btn btn-secondary" > x </button>
+    </div>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category5" (change)="searchCategory5(category.category5)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5=='hipervinculo' && category.category5" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service5" (change)="searchService5(serviceH.service5)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service5 of allService5; let i = index" value={{service5.issue}}>{{service5.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5=='hipervinculo' && serviceH.service5" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService5" (change)="searchService5(subService.subService5)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService5 of allSubService5; let i = index" value={{subService5.id}}>{{subService5.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo5(campo5=undefined)">X</button>
+    </div>
+
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && !campo6" style="text-align: center; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo6(campo6='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo6(campo6='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo6(campo6='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6=='texto'" class="col-md-12" style="margin-top: 15px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text6" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6=='imagen'">
+      <input *ngIf="!fileToUpload6" type="file" clas="btn btn-primary" placeholder="Sube imagen..." (change)="fileChangeEvent6($event)">
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload6">
+        <img style="height: 120px; width: 95px;"/>
+      <label *ngIf="fileToUpload6" style="text-align: left; margin-top: 5px;">{{newName6}}</label>
+      <button *ngIf="fileToUpload6" (click)="imgCancel6()" type="button" class="btn btn-secondary" > x </button>
+    </div>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category6" (change)="searchCategory6(category.category6)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6=='hipervinculo' && category.category6" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service6" (change)="searchService6(serviceH.service6)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service6 of allService6; let i = index" value={{service6.issue}}>{{service6.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6=='hipervinculo' && serviceH.service6" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService6" (change)="searchService6(subService.subService6)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService6 of allSubService6; let i = index" value={{subService6.id}}>{{subService6.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo6(campo6=undefined)">X</button>
+    </div>
+
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && !campo7" style="text-align: center; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo7(campo7='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo7(campo7='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo7(campo7='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7=='texto'" class="col-md-12" style="margin-top: 15px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text7" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7=='imagen'">
+      <input *ngIf="!fileToUpload7" type="file" clas="btn btn-primary" placeholder="Sube imagen..." (change)="fileChangeEvent7($event)">
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload7">
+        <img style="height: 120px; width: 95px;"/>
+      <label *ngIf="fileToUpload7" style="text-align: left; margin-top: 5px;">{{newName7}}</label>
+      <button *ngIf="fileToUpload7" (click)="imgCancel7()" type="button" class="btn btn-secondary" > x </button>
+    </div>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category7" (change)="searchCategory7(category.category7)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7=='hipervinculo' && category.category7" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service7" (change)="searchService7(serviceH.service7)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service7 of allService7; let i = index" value={{service7.issue}}>{{service7.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7=='hipervinculo' && serviceH.service7" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService7" (change)="searchService7(subService.subService7)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService7 of allSubService7; let i = index" value={{subService7.id}}>{{subService7.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo7(campo7=undefined)">X</button>
+    </div>
+
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7 && !campo8" style="text-align: center; margin-bottom: 10px; text-align: start;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo8(campo8='texto')">+ Texto</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo8(campo8='imagen')">+ Documento (img, pdf, word, excel, pp, gif)</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addCampo8(campo8='hipervinculo')">+ Hipervínculo</button>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7 && campo8=='texto'" class="col-md-12" style="margin-top: 15px;">
+      <textarea #name="ngModel"  name="note" [(ngModel)]="text.text8" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7 && campo8=='imagen'">
+      <input *ngIf="!fileToUpload8" type="file" clas="btn btn-primary" placeholder="Sube imagen..." (change)="fileChangeEvent8($event)">
+      <div class="col-md-12" style="text-align: center;" *ngIf="fileToUpload8">
+        <img style="height: 120px; width: 95px;"/>
+      <label *ngIf="fileToUpload8" style="text-align: left; margin-top: 5px;">{{newName8}}</label>
+      <button *ngIf="fileToUpload8" (click)="imgCancel8()" type="button" class="btn btn-secondary" > x </button>
+    </div>
+    </div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7 && campo8=='hipervinculo'" class="col-md-6" style="margin-top: 30px;" >
+      <label class="col-md-4" style="text-align: right; margin-top: 5px;">Servicio: *</label>
+      <div class="col-md-8">
+          <select class="form-control" #name="ngModel" name="select" [(ngModel)]="category.category8" (change)="searchCategory8(category.category8)">
+              <option value=undefined>▼</option>
+              <option *ngFor="let category of allCategory; let i = index" value={{category.name}}>{{category.name}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7 && campo8=='hipervinculo' && category.category8" class="col-md-6" style="margin-top: 5px;" >
+    <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+    <div class="col-md-8">
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="serviceH.service8" (change)="searchService8(serviceH.service8)">
+            <option value=undefined>▼</option>
+            <option *ngFor="let service8 of allService8; let i = index" value={{service8.issue}}>{{service8.issue}}</option>
+        </select>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7 && campo8=='hipervinculo' && serviceH.service8" class="col-md-6" style="margin-top: 5px;" >
+  <label class="col-md-4" style="text-align: right; margin-top: 5px;"></label>
+  <div class="col-md-8">
+      <select class="form-control" #name="ngModel" name="select" [(ngModel)]="subService.subService8" (change)="searchService8(subService.subService8)">
+          <option value=undefined>▼</option>
+          <option *ngFor="let subService8 of allSubService8; let i = index" value={{subService8.id}}>{{subService8.subcategory}}</option>
+      </select>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+    <div *ngIf="campo1 && campo2 && campo3 && campo4 && campo5 && campo6 && campo7 && campo8" class="col-md-12" style="margin-top: 1px; margin-bottom: 40px;">
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" (click)="cancelCampo8(campo8=undefined)">X</button>
+    </div>
+    
+
+    <div style="text-align: center; margin-bottom: 10px; text-align: end;">
+      <button style="margin-top: 30px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" (click)="addNew(newIssue)">Guardar</button>
+  </div>
+  <div class="clearfix"></div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<div *ngIf="load==true">
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div *ngIf="issue" class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="width: 100%;" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #5e5e5e; color: #ffffff;">
+        <h4 class="modal-title" id="exampleModalLabel" style="color: rgb(255, 255, 255);">{{issue.issue}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: fixed; right: 3%; color: rgb(255, 255, 255);">
+          <span  aria-hidden="true" >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-4" style="left: -2%;">
+          <label>Categoría</label>
+          <br>
+          <label style="font-weight: normal;">-{{issue.category}}</label>
+          <br><br>
+          <label>Asunto</label>
+          <br>
+          <label style="font-weight: normal;">-{{issue.issue}}</label>
+          <br><br>
+          <label>Palabras Clave</label>
+          <br>
+          <label style="font-weight: normal;">-{{issue.keyword}}</label>
+          <br><br>
+          <label>Resumen</label>
+          <br>
+          <label style="font-weight: normal;">-{{issue.abstract}}</label>
+          <br><br>
+        </div>        
+        <div class="col-md-8">
+          <label>Descripción</label>
+          <br>
+          <label style="font-weight: normal;">Aquí va la descripcion para solucionar el problema y tambien las imagenes cargadas</label>
+          <br>
+          <label style="font-weight: normal;">imagenes y mas descripciones</label>
+
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" style="background-color: #d63245;" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+#loader {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color:#f53737;
+  -webkit-animation: spin 2s linear infinite;
+  /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 2s linear infinite;
+  /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #eeeeee;
+  -webkit-animation: spin 3s linear infinite;
+  /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 3s linear infinite;
+  /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #bb2121;
+  -webkit-animation: spin 1.5s linear infinite;
+  /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 1.5s linear infinite;
+  /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
+    transform: rotate(0deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(360deg);
+    /* IE 9 */
+    transform: rotate(360deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
+    transform: rotate(0deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(360deg);
+    /* IE 9 */
+    transform: rotate(360deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+}
+
+</style>

@@ -1,0 +1,817 @@
+<div class="col-md-9">
+  <h3 style="margin-left: -1.8%; color: #DDCBA4">
+    <div style="font-size: 95%" class="col-md-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
+      </svg>
+    </div>
+    <div *ngIf="identity.type != 'callCenter'" class="col-md-5" style="margin-left: -4%; font-family: 'sofia-pro'; font-size: 110%; font-weight: 510;">
+      MÉTRICAS
+    </div>
+    <div *ngIf="identity.type == 'callCenter'" class="col-md-5" style="margin-left: -4%; font-family: 'sofia-pro'; font-size: 110%; font-weight: 510;">
+      MÉTRICAS GLOBALES
+    </div>
+  </h3>
+</div>
+<div class="col-md-3" style="margin-top: 20px; margin-bottom: 10px;">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <button class="btn btn-default" style="background-color: #e1e1e1;" type="button" (click)="goToSearch(search)">
+        <div style="font-size: 10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </div>
+      </button>
+    </span>
+    <input style="background-color: #e1e1e1;" type="text" class="form-control" placeholder="Buscar Folio" #name="ngModel" name="search" [(ngModel)]="search">
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<section class="row" id="main-content">
+    <div class="col-xs-12">
+
+<div class="panel panel-default" style="background-color: #DDCBA4; border-color: rgb(71, 71, 71);">
+<div class="panel-body">
+
+
+<div class="col-md-4" style="margin-top: 1%; ">
+  <div clas="col-md-12" style="text-align: center; color: #3F2021; font-family: 'sofia-pro'; font-size: large; margin-left: -15%;">
+    Diario
+  </div>
+  <div class="clearfix"></div>
+
+
+  <div class="col-md-6" style="margin-top: 1%;">
+    <div style="color: #3F2021; font-family:'sofia-pro' ; font-size: medium; text-align: end;">
+      Reportados
+    </div>
+  </div>
+  <div class="col-md-6" style="margin-top: 1%;">
+    <div style="color: #3F2021; font-family: 'sofia-pro'; font-size: medium; margin-left: -15%;">
+     {{reportDiario}}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="col-md-6" style="margin-top: 0%;">
+    <div style="color: #3F2021; font-family: 'sofia-pro'; font-size: medium; text-align: end;">
+      Cerrados:
+    </div>
+  </div>
+  <div class="col-md-6" style="margin-top: 0%;">
+    <div style="color: #3F2021; font-size: medium; margin-left: -15%; font-family: 'sofia-pro';">
+      {{cerradoDiario}}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+
+  <div clas="col-md-12" style="text-align: center; color: #3F2021; font-family: 'sofia-pro'; font-size: large; margin-left: -15%; margin-top: 9%;">
+    Mes Actual
+  </div>
+  <div class="clearfix"></div>
+
+
+  <div class="col-md-6" style="margin-top: 1%;">
+    <div style="color: #3F2021; font-size: medium; text-align: end; font-family: 'sofia-pro';">
+      Reportados:
+    </div>
+  </div>
+  <div class="col-md-6" style="margin-top: 1%;">
+    <div style="color: #3F2021; font-size: medium; margin-left: -15%; font-family: 'sofia-pro';">
+      {{reportMes}}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="col-md-6" style="margin-top: 0%;">
+    <div style="color: #3F2021; font-size: medium; text-align: end; font-family: 'sofia-pro';">
+      Cerrados:
+    </div>
+  </div>
+  <div class="col-md-6" style="margin-top: 0%;">
+    <div style="color: #3F2021; font-size: medium; margin-left: -15%; font-family: 'sofia-pro';">
+      {{cerradoMes}}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+
+  <div clas="col-md-12" style="text-align: center; color: #3F2021; font-family: 'sofia-pro'; font-size: large; margin-left: -15%; margin-top: 9%;">
+    Año Actual
+  </div>
+  <div class="clearfix"></div>
+
+
+  <div class="col-md-6" style="margin-top: 1%;">
+    <div style="color: #3F2021; font-size: medium; text-align: end; font-family: 'sofia-pro';">
+      Reportados:
+    </div>
+  </div>
+  <div class="col-md-6" style="margin-top: 1%;">
+    <div style="color: #3F2021; font-size: medium; margin-left: -15%; font-family: 'sofia-pro';">
+      {{reportAnual}}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="col-md-6" style="margin-top: 0%;">
+    <div style="color: #3F2021; font-size: medium; text-align: end; font-family: 'sofia-pro';">
+      Cerrados:
+    </div>
+  </div>
+  <div class="col-md-6" style="margin-top: 0%;">
+    <div style="color: #3F2021; font-size: medium; margin-left: -15%; font-family: 'sofia-pro';">
+      {{cerradoAnual}}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+
+
+</div>
+
+<div style="color: #3F2021; font-size: large; margin-left: 47%; font-family: 'sofia-pro';">
+  General
+</div>
+<div class="col-md-4" style="margin-top: 0%;">
+  <div class="col-md-6">
+    <div class="col-md-12">
+    <div style="text-align: center; color: #3F2021; font-size: medium; font-family: 'sofia-pro';">
+      Nuevo
+    </div>
+    <div style="height: 100px; width: 140px; background-color: #3F2021; color: #fff; text-align: center; margin-top: 4%;">
+      <div style="color: rgba(255, 255, 0, 0.896); font-size: 400%; padding-top: 10%;">
+        {{nuevo}}
+      </div>
+    </div>
+
+    </div>
+    <div class="clearfix"></div>
+
+
+    <div class="col-md-12" style="padding-top: 18px;">
+      <div style="text-align: center; color: #3F2021; font-size: medium; font-family: 'sofia-pro';">
+        Asignado
+      </div>
+      <div style="height: 100px;  width: 140px; background-color: #3F2021; color: #fff; text-align: center; margin-top: 4%;">
+        <div style="color:  rgba(255, 255, 0, 0.896); font-size: 400%; padding-top: 10%;">
+          {{asignado}}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+
+    <div class="col-md-12">
+
+    <div style="text-align: center; color: #3F2021; font-size: medium; font-family: 'sofia-pro';">
+      Cerrados
+    </div>
+    <div style="height: 100px;  width: 140px; background-color: #3F2021; color: #fff; text-align: center; margin-top: 4%;">
+      <div style="color:  rgba(0,128,0,.7); font-size: 400%; padding-top: 10%;">
+        {{cerradoTot}}
+      </div>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+
+
+    <div class="col-md-12" style="padding-top: 18px;">
+      <div style="text-align: center; color: #3F2021; font-size: medium; font-family: 'sofia-pro';">
+        Pendientes
+      </div>
+      <div style="height: 100px; width: 140px; background-color: #3F2021; color: #fff; text-align: center; margin-top: 4%; margin-bottom: 10%;">
+        <div style="color: rgba(255, 255, 0, 0.896); font-size: 400%; padding-top: 10%;">
+          {{pendiente}}
+        </div>
+      </div>
+  
+      </div>
+      <div class="clearfix"></div>
+
+
+  </div>
+
+</div>
+
+<div class="col-md-4" style="margin-top: 1%;">
+<div style="color: #3F2021; text-align: center; font-size: medium; font-family: 'sofia-pro';">
+  Timckets Mensuales
+</div>
+
+<div class="col-md-12">
+  <div>
+  <div style="color: #3F2021; font-family: 'sofia-pro'; font-size: 30px; text-align: end;" class="col-md-7">
+    {{mes1}}
+  </div>
+  <div style="color: #3F2021; font-size: 30px; text-align: end;" class="col-md-3">
+    {{mes1Num}}
+  </div>
+  <div class="col-md-2" style="font-size: 30px;">
+    <!-- <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> -->
+  </div>
+  </div>
+
+  <div>
+    <div style="color: #3F2021; font-family: 'sofia-pro'; font-size: 30px; text-align: end;" class="col-md-7">
+      {{mes2}}
+    </div>
+    <div style="color: #3F2021;; font-size: 30px; text-align: end;" class="col-md-3">
+      {{mes2Num}}
+    </div>
+    <div class="col-md-2" style="font-size: 30px;">
+      <!-- <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> -->
+    </div>
+    </div>
+
+    <div>
+      <div style="color: #3F2021; font-family: 'sofia-pro'; font-size: 30px; text-align: end; padding-left: 5%;" class="col-md-7">
+        {{mes3}}
+      </div>
+      <div style="color: #3F2021;; font-size: 30px; text-align: end;" class="col-md-3">
+        {{mes3Num}}
+      </div>
+      <div class="col-md-2" style="font-size: 30px;">
+        <!-- <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> -->
+      </div>
+      </div>
+
+      <div>
+        <div style="color: #3F2021; font-family: 'sofia-pro'; font-size: 30px; text-align: end; padding-left: 5%;" class="col-md-7">
+          {{mes4}}
+        </div>
+        <div style="color: #3F2021; font-size: 30px; text-align: end;" class="col-md-3">
+          {{mes4Num}}
+        </div>
+        <div class="col-md-2" style="font-size: 30px;">
+          <!-- <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> -->
+        </div>
+        </div>
+
+</div>
+
+</div>
+
+
+
+</div>
+</div>
+
+<h3 style="color: #DDCBA4; margin-top: 2%;">
+  <div style="font-size: 95%" class="col-md-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 16 16">
+      <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+      <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
+    </svg>
+  </div>
+    <div class="col-md-10" style="margin-left: -5%; font-family: 'sofia-pro'; font-size: 110%; font-weight: 510;">
+      ADMINISTRACIÓN DE REQUERIMIENTOS
+    </div>
+</h3>
+<div class="panel panel-default" style="background-color: #DDCBA4; border-color: rgb(71, 71, 71); margin-top: 5%;">
+  <div class="panel-body">
+
+  <div *ngIf="identity.type!='callCenter'" class="portlet-body form" style="margin-top: 2%; font-size: 110%;">
+    <div class="row">
+    <div class="col-md-12" style="width: 100%; height: 100%; overflow-x: scroll;">
+    <table class="table table-striped table-bordered table-hover table-checkable order-column" [mfData]="inNew" #mf="mfDataTable" [(mfSortBy)]="sortBy" [mfRowsOnPage]="20">
+      <thead>
+        <tr>
+          <th style="text-align: center;"><mfDefaultSorter><a style="color: #3F2021;"> # </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="issueMore.critico"><a style="color: #3F2021;"> Critico</a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="codeRequest"><a style="color: #3F2021;"> Nombre Común</a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="dateOfReport"><a style="color: #3F2021;"> Fecha de inicio </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><a style="color: #3F2021;"> Hora </a></th>
+          <th style="text-align: center;"><mfDefaultSorter by="subCategory"><a style="color: #3F2021;"> Subcategoría </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="service"><a style="color: #3F2021;"> Servicio  </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="numSerie"><a style="color: #3F2021;">  Num.Serie </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="issue.category"><a style="color: #3F2021;"> Área </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="issue.sla"><a style="color: #3F2021;"> SLA </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="restantes"><a style="color: #3F2021;"> Restante </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="status"><a style="color: #3F2021;"> Estatus  </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="reportBy.name"><a style="color: #3F2021;"> Reportado por </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="analyst.fnames"><a style="color: #3F2021;"> Analista </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="pasado"><a style="color: #3F2021;"> Vencido </a></mfDefaultSorter></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #dad2c1;">
+          <td></td>
+          <td > <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="critico" [(ngModel)]="search.critico" (ngModelChange)="searchCritico(search.critico)"></td>
+          <td > <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="folio" [(ngModel)]="search.folio" (ngModelChange)="searchFolio(search.folio)"></td>
+          <td> </td>
+          <td> </td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="subcategoria" [(ngModel)]="search.subcategoria" (ngModelChange)="searchSubcategoria(search.subcategoria)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="servicio" [(ngModel)]="search.servicio" (ngModelChange)="searchServicio(search.servicio)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="numSerie" [(ngModel)]="search.numSerie" (ngModelChange)="searchNumSerie(search.numSerie)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="area" [(ngModel)]="search.area" (ngModelChange)="searchArea(search.area)"></td>
+          <td> </td>
+          <td> </td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="estatus" [(ngModel)]="search.estatus" (ngModelChange)="searchEstatus(search.estatus)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="reportadoPor" [(ngModel)]="search.reportadoPor" (ngModelChange)="searchReportBy(search.reportadoPor)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="analista" [(ngModel)]="search.analista" (ngModelChange)="searchAnalista(search.analista)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="vencido" [(ngModel)]="search.vencido" (ngModelChange)="searchVencido(search.vencido)"></td>
+        </tr>
+        <tr class="odd gradeX" *ngFor="let item of mf.data; let i = index" style="background-color: #dad2c1;">
+          <td style="text-align: center;"> {{i + 1}} </td>
+          <td style="text-align: center;"> <a *ngIf="item.issueMore.critico==true" style="color: #C8102E;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+            </svg>
+          </a> </td>
+          <td style="text-align: center; padding-top: 0.2%;"> 
+            <a href="{{link}}requestDetail/{{item.codeRequest}}">
+            <!-- <a> -->
+              <button type="button" class="btn" style="color: #C8102E;">{{item.codeRequest}}</button>
+            </a>
+          </td>
+          <td style="text-align: center;"> {{momentTimeDate(item.dateOfReport1)}} </td>
+          <td style="text-align: center;"> {{momentTimeHour(item.dateOfReport1)}} </td>
+          <td style="text-align: center;"> {{item.subCategory}} </td>
+          <td style="text-align: center;"> {{item.service}} </td>
+          <td style="text-align: center;"> {{item.numSerie}} </td>
+          <td style="text-align: center;"> {{item.issue.category}} </td>
+          <td style="text-align: center;"> {{item.issue.sla}} </td>
+          <td style="text-align: center;"> <a *ngIf="item.status!='Solucionado'">{{item.restantes}}</a> <a *ngIf="item.status=='Solucionado'"></a> </td>
+          <td style="text-align: center;"><a *ngIf="item.status" >{{item.status}} </a> <a *ngIf="!item.status" >{{item.statusCallCenter}}</a><label *ngIf="item.reaperturado && item.reaperturado[0]">Reaperturado</label> </td>
+          <td style="text-align: center;"> {{item.reportBy.name}}<label *ngIf="item.reportByAm" style="font-size: 90%;"> - {{item.manager}}</label> </td>
+          <td style="text-align: center;"> <a *ngIf="item.analyst">{{item.analyst.fnames}}</a></td>
+          <td style="text-align: center;"><a *ngIf="!item.pasado && item.pasado!='red'"> </a> <a  *ngIf="item.pasado && item.pasado=='red'"> Si </a> </td>
+        </tr>
+
+        <td></td>
+        <td> <a style="font-size: 120%;" *ngIf="inNew">Total: {{inNew.length}}</a> </td>
+      </tbody>
+      <tfoot>
+        <tr style="background-color: #dad2c1">
+            <td colspan="12">
+                <mfBootstrapPaginator [rowsOnPageSet]="[20,50,100,1000,10000]"></mfBootstrapPaginator>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    </div>
+  </div>
+  </div>
+  
+
+
+  <div *ngIf="identity.type=='callCenter'" class="portlet-body form" style="margin-top: 2%; font-size: 110%;">
+    <div class="row">
+    <div class="col-md-12" style="width: 100%; height: 100%; overflow-x: scroll;">
+    <table class="table table-striped table-bordered table-hover table-checkable order-column" [mfData]="inNew" #mf="mfDataTable" [(mfSortBy)]="sortBy" [mfRowsOnPage]="20">
+      <thead>
+        <tr>
+          <th style="text-align: center;"><mfDefaultSorter><a style="color: #3F2021;"> # </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="issueMore.critico"><a style="color: #3F2021;"> Critico</a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="codeRequest"><a style="color: #3F2021;"> Nombre Común</a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="dateOfReport"><a style="color: #3F2021;"> Fecha de inicio </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><a style="color: #3F2021;"> Hora </a></th>
+          <th style="text-align: center;"><mfDefaultSorter by="subCategory"><a style="color: #3F2021;"> Subcategoría </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="service"><a style="color: #3F2021;"> Servicio  </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="numSerie"><a style="color: #3F2021;">  Num.Serie </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="issue.category"><a style="color: #3F2021;"> Área </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="issue.slaCallCenter"><a style="color: #3F2021;"> SLA CallC.</a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="restantes"><a style="color: #3F2021;"> Restante </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="statusCallCenter"><a style="color: #3F2021;"> Estatus  </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="reportBy.name"><a style="color: #3F2021;"> Reportado por </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="analyst.fnames"><a style="color: #3F2021;"> Analista </a></mfDefaultSorter></th>
+          <th style="text-align: center;"><mfDefaultSorter by="pasado"><a style="color: #3F2021;"> Vencido </a></mfDefaultSorter></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #dad2c1;">
+          <td></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="critico" [(ngModel)]="search.critico" (ngModelChange)="searchCritico(search.critico)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="folio" [(ngModel)]="search.folio" (ngModelChange)="searchFolio(search.folio)"></td>
+          <td> </td>
+          <td> </td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="subcategoria" [(ngModel)]="search.subcategoria" (ngModelChange)="searchSubcategoria(search.subcategoria)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="servicio" [(ngModel)]="search.servicio" (ngModelChange)="searchServicio(search.servicio)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="numSerie" [(ngModel)]="search.numSerie" (ngModelChange)="searchNumSerie2(search.numSerie)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="area" [(ngModel)]="search.area" (ngModelChange)="searchArea(search.area)"></td>
+          <td> </td>
+          <td> </td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="estatusCallCenter" [(ngModel)]="search.estatusCallCenter" (ngModelChange)="searchEstatus(search.estatusCallCenter)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="reportadoPor" [(ngModel)]="search.reportadoPor" (ngModelChange)="searchReportBy(search.reportadoPor)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="analista" [(ngModel)]="search.analista" (ngModelChange)="searchAnalista(search.analista)"></td>
+          <td> <input type="text" style="width: 100%; background-color: #e1e1e1;" #name="ngModel" name="vencido" [(ngModel)]="search.vencido" (ngModelChange)="searchVencido(search.vencido)"></td>
+        </tr>
+        <tr class="odd gradeX" *ngFor="let item of mf.data; let i = index" style="background-color: #dad2c1">
+          <td style="text-align: center;"> {{i + 1}} </td>
+          <td style="text-align: center;"> <a *ngIf="item.issueMore.critico==true" style="color: #C8102E;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+            </svg>
+            </a> </td>
+          <td style="text-align: center; padding-top: 0.2%;"> 
+            <a href="{{link}}requestDetail/{{item.codeRequest}}">
+            <!-- <a> -->
+              <button type="button" class="btn" style="color: #C8102E;">{{item.codeRequest}}</button>
+            </a>
+          </td>
+          <td style="text-align: center;"> {{momentTimeDate(item.dateOfReport1)}} </td>
+          <td style="text-align: center;"> {{momentTimeHour(item.dateOfReport1)}} </td>          <td style="text-align: center;"> {{item.subCategory}} </td>
+          <td style="text-align: center;"> {{item.service}} </td>
+          <td style="text-align: center;"> {{item.numSerie}} </td>
+          <td style="text-align: center;"> {{item.issue.category}} </td>
+          <td style="text-align: center;"> {{item.issue.slaCallCenter}} </td>
+          <td style="text-align: center;"> <a *ngIf="item.statusCallCenter!='SolucionadoCallCenter'">{{item.restantes}}</a> <a *ngIf="item.statusCallCenter=='SolucionadoCallCenter'"></a> </td>
+          <td style="text-align: center;"> {{item.statusCallCenter}} <label *ngIf="item.reaperturado && item.reaperturado[0]">Reaperturado</label> </td>
+          <td style="text-align: center;"> {{item.reportBy.name}}<label *ngIf="item.reportByAm" style="font-size: 90%;"> - {{item.manager}}</label> </td>
+          <td style="text-align: center;"> <a *ngIf="item.analyst">{{item.analyst.fnames}}</a></td>
+          <td style="text-align: center;"><a *ngIf="!item.pasado && item.pasado!='red'"> </a> <a  *ngIf="item.pasado && item.pasado=='red'"> Si </a> </td>
+        </tr>
+
+        <td></td>
+        <td> <a style="font-size: 120%;" *ngIf="inNew">Total: {{inNew.length}}</a> </td>
+      </tbody>
+      <tfoot>
+        <tr>
+            <td colspan="12">
+                <mfBootstrapPaginator [rowsOnPageSet]="[20,50,100,1000,10000]"></mfBootstrapPaginator>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    </div>
+  </div>
+  </div>
+
+  </div>
+  </div>
+
+
+</div>
+</section>
+
+<div *ngIf="load==true">
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="issue" class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="width: 100%;" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #5e5e5e; color: #ffffff;">
+        <h4 class="modal-title;" id="exampleModalLabel" style="color: rgb(255, 255, 255); position: fixed; left: 2%">  Actualizando  {{issue.codeRequest}}  (Requerimiento) - {{issue.issue.category}} </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: fixed; right: 2%; color: rgb(255, 255, 255);">
+          <span  aria-hidden="true" >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">     
+
+        <div class="col-md-7" style="margin-top: 10px;">
+        <div class="card" style="width: 100%; height: 100%; background-color: #f7f7f7;">
+          <div class="card-body">
+            <div class="row">
+              <label style="text-align: left; margin-top: -30px; margin-left: 20px;"><h4>Información General</h4></label>
+
+              <div>
+                <div class="col-md-5" style="margin-top: 1%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">servicio </label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.service}} </label>      
+                  </div>          
+                </div>
+                <div class="col-md-7" style="margin-top: 1%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Subcategoría </label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.subCategory}} </label>      
+                  </div>          
+                </div>
+              </div>
+
+              <div>
+                <div class="col-md-5" style="margin-top: 4%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Sucursal</label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.reportBy.name}} </label>      
+                  </div>          
+                </div>
+                <div class="col-md-7" style="margin-top: 4%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Reportado por </label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.manager}} </label>      
+                  </div>          
+                </div>
+              </div>
+
+
+              <div>
+                <div class="col-md-12" style="margin-top: 4%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Descripción</label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.description}} </label>      
+                  </div>          
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5" style="margin-top: 10px;">
+        <div class="card" style="width: 100%; height: 100%; background-color: #f7f7f7;">
+          <div class="card-body">
+            <div class="row">
+              <label style="text-align: left; margin-top: -30px; margin-left: 20px;"><h4>Clasificación & Fechas</h4></label>
+              <div>
+                <div class="col-md-5" style="margin-top: 1%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Estatus </label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.status}} </label>      
+                  </div>          
+                </div>
+                <div class="col-md-7" style="margin-top: 1%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Fecha de inicio </label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.dateOfReport1}} </label>      
+                  </div>          
+                </div>
+              </div>
+              
+              <div style="margin-top: 4%;">
+                <div class="col-md-5" style="margin-top: 1%;">
+                  <div class="col-md-12" *ngIf="issue.analyst">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Analista </label>
+                  </div>
+                  <div class="col-md-12" *ngIf="issue.analyst">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.analyst}} </label>      
+                  </div>          
+                </div>
+                <div class="col-md-7" style="margin-top: 1%;">
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #575757; font-weight:0;">Última actualización </label>
+                  </div>
+                  <div class="col-md-12">
+                    <label style="text-align: left; color: #747474; font-weight:30;">- {{issue.dateLastUpdate}} </label>      
+                  </div>          
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12" style="margin-top: 20px;" *ngFor="let item of issue.notes; let i = index">
+        <div class="col-md-12">
+          <textarea name="note" class="form-control" placeholder="Escribe aquí tus comentarios" rows="1" cols="1" [disabled]="true">{{momentTime(item.dateOfNote)}} : {{item.noteBy}} </textarea>
+      </div>
+        <div class="col-md-12" style="margin-top: 2px;">
+          <textarea name="note" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40" [disabled]="true"> {{item.note}} </textarea>
+      </div>
+        </div>
+      <div class="col-md-12" style="margin-top: 40px;">
+          <label style="text-align: left; color: #575757; font-weight:0;">Bitácora pública </label>
+          <textarea name="comentarios"name="description" class="form-control" placeholder="Escribe aquí tus comentarios" rows="5" cols="40"></textarea>
+      </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" style="background-color: #dddddd; color: #1b1b1b;" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" style="background-color: #d63245;"  (click)="asignar()">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+* {
+    box-sizing: border-box;    
+}
+.grafico {
+    height: 200px;
+    margin: 1rem;
+    position: relative;
+    width: 200px;
+      } 
+.recorte {
+    border-radius: 50%;
+    clip: rect(0px, 200px, 200px, 100px);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+     }
+.quesito {
+    border-radius: 50%;
+    clip: rect(0px, 100px, 200px, 0px);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    font-family: monospace;
+    font-size: 1.5rem;
+     }
+.sombra {
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
+    border: 5px solid #000;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+     }
+
+#porcion1 {
+    transform: rotate(-40deg);
+     }
+
+#porcion1 .quesito {
+    background-color:rgb(197, 197, 197);
+    transform: rotate(180deg);
+     }
+#porcion2 {
+    transform: rotate(70deg);
+     }
+#porcion2 .quesito {
+    background-color:rgb(197, 197, 197);
+    transform: rotate(170deg);
+     }
+#porcion3 {
+    transform: rotate(-200deg);
+     }
+#porcion3 .quesito {
+    background-color:rgb(197, 197, 197);
+    transform: rotate(45deg);
+     }
+#porcionFin {
+    transform:rotate(-175deg);
+     }
+#porcionFin .quesito {
+    background-color:rgb(197, 197, 197);
+    transform: rotate(145deg);
+     }
+#porcion1 .quesito:after {
+    content: attr(data-rel);
+    left: 25%;
+    line-height: 5;
+    position: absolute;
+    top: 0;
+    transform: rotate(-70deg);
+}
+#porcion2 .quesito:after {
+    content: attr(data-rel);
+    left: 15%;
+    position: absolute;
+    top: 30%;
+    transform: rotate(-190deg);
+}
+#porcion3 .quesito:after {
+    content: attr(data-rel);
+    left: 35%;
+    position: absolute;
+    top: 4%;
+    transform: rotate(70deg);
+}
+#porcionFin .quesito:after {
+   content: attr(data-rel);
+   left: 10%;
+   position: absolute;
+   top: 30%;
+}
+
+
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+  }
+
+  #loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color:#f53737;
+    -webkit-animation: spin 2s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  #loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #eeeeee;
+    -webkit-animation: spin 3s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 3s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  #loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #bb2121;
+    -webkit-animation: spin 1.5s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 1.5s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);
+      /* IE 9 */
+      transform: rotate(0deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);
+      /* IE 9 */
+      transform: rotate(360deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);
+      /* IE 9 */
+      transform: rotate(0deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);
+      /* IE 9 */
+      transform: rotate(360deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+  }
+
+@import url("https://p.typekit.net/p.css?s=1&k=lkr2zif&ht=tk&f=24539.24540.24547&a=6178157&app=typekit&e=css");
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+</style>

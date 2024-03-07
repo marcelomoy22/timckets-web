@@ -1,0 +1,258 @@
+<!-------------------------------------------------------------
+-------------******* Vista de Sucursal GRANDE *******------------
+--------------------------------------------------------------->
+
+<div class="col-lg-12" *ngIf="medida=='grande'">
+    <h1 style="margin-left: 15px; color: #3F2021; font-family: 'sofia-pro'; font-size: 240%; font-weight: 510">{{title}}</h1>
+
+    <div class="col-lg-6">
+        <div class="card" style="width: 100%; height: 150px;" [routerLink]="['/requestNew']">
+            <div class="card-body">
+                <div class="col-lg-2" style="text-align: center; font-size: 40px; margin-top: 40px;">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-10" style="color: #3F2021">
+                    <h3>
+                        Nuevo Requerimiento
+                    </h3>
+                    <div>
+                        ¿Necesita ayuda? Elija del catálogo de servicios y envíe su requerimiento a nuestros equipos de soporte, para que en breve sea atendido
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6">
+        <div class="card" style="width: 100%; height: 150px;" [routerLink]="['/requestProces']">
+            <div class="card-body">
+                <div class="col-lg-2" style="text-align: center; font-size: 40px; margin-top: 40px;">
+                    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-10" style="color: #3F2021">
+                    <h3>
+                        Requerimientos en Proceso
+                    </h3>
+                    <div>
+                        Revise sus requerimientos en proceso. Compruebe el progreso, agregue comentarios, adjunte documentos, entienda la solución.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12" style="margin-top: 28px;">
+        <div class="card" style="width: 100%;" [routerLink]="['/answer']">
+            <div class="card-body">
+                <div class="col-lg-1" style="text-align: center; font-size: 40px; margin-top: 35px;">
+                    <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-11" style="color: #3F2021">
+                    <h3>
+                        Preguntas y Respuestas Frecuentes
+                    </h3>
+                    <div>
+                        ¿En una prisa?
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        Vea la lista de las preguntas más comunes y encontrará (tal vez) la respuesta inmediata a sus necesidades.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<div class="col-lg-6">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-11" style="margin-top: 28px; text-align: center;">
+        <div class="card" style="width: 100%; height: 165px;" [routerLink]="['/message']">
+            <div class="card-body">
+                <div class="col-lg-2" style="text-align: center; font-size: 40px; margin-top: 40px;">
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-10" style="color: #3F2021">
+                    <h3>
+                        Comentarios de Bitácora
+                    </h3>
+                    <div>
+                        Mensajes pendientes por responder
+                    </div>
+                    <div *ngIf="message && message.length>=1" style="margin-top: 3%;">
+                        <a style="font-size: 280%;"><img style="width: 55px; height:55px;" src="./assets/bell.gif" /> <a style="color: #C8102E"> {{ message.length}}</a> <a style="font-size: 90%;"> Pendiente(s)</a> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1">
+    </div>
+</div>
+
+<div class="col-lg-6">
+    
+    <div class="col-lg-11" style="margin-top: 28px; text-align: center;">
+        <div class="card" style="width: 100%; height: 165px;" [routerLink]="['/encuesta']">
+            <div class="card-body">
+                <div class="col-lg-2" style="text-align: center; font-size: 40px; margin-top: 40px;">
+                    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-10" style="color: #3F2021">
+                    <h3>
+                        Encuestas de Satisfacción
+                    </h3>
+                    <div>
+                        Califica la atención brindada por parte del analista
+                    </div>
+                    <div *ngIf="dataEncuesta" style="margin-top: 3%;">
+                        <a style="font-size: 280%;"><img style="width: 55px; height:55px;" src="./assets/bell.gif" /> <a style="color: #C8102E"> {{ dataEncuesta.length}}</a> <a style="font-size: 90%;"> Pendiente(s)</a> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1">
+    </div>
+</div>
+
+</div>
+
+
+<!-------------------------------------------------------------
+-------------******* Vista de Sucursal CHICA *******------------
+--------------------------------------------------------------->
+
+<div class="col-lg-12" *ngIf="medida=='chica'">
+    <h2>{{title}}</h2>
+
+    <div class="col-lg-12" style="margin-top: -5px;">
+        <div class="card" style="width: 100%; height: 130px;" [routerLink]="['/requestNew']">
+            <div class="card-body">
+                <div class="col-lg-1" style="text-align: center; font-size: 30px; margin-top: -4px;">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-9" style="text-align: center; margin-top: -20px; color:#3F2021">
+                    <h4>
+                        Nuevo Requerimiento
+                    </h4>
+                    <div>
+                        Envíe su requerimiento, para que en breve sea atendido.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12" style="margin-top: 6px;">
+        <div class="card" style="width: 100%; height: 140px;" [routerLink]="['/requestProces']">
+            <div class="card-body">
+                <div class="col-lg-1" style="text-align: center; font-size: 30px; margin-top: -4px;">
+                    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-9" style="text-align: center; margin-top: -25px; color:#3F2021">
+                    <h4>
+                        Requerimientos en Proceso
+                    </h4>
+                    <div>
+                        Revise sus requerimientos en proceso.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="col-lg-12">
+    <div class="col-lg-11" style="margin-top: 11px; text-align: center;">
+        <div class="card" style="width: 100%; height: 170px;" [routerLink]="['/message']">
+            <div class="card-body">
+                <div class="col-lg-2" style="text-align: center; font-size: 30px; margin-top: -4px;">
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-9" style="text-align: center; margin-top: -25px; color:#3F2021">
+                    <h3>
+                        Comentarios de Bitácora
+                    </h3>
+                    <div>
+                        pendientes por responder
+                    </div>
+                    <div *ngIf="message && message.length>=1" style="margin-top: 0%;">
+                        <a style="font-size: 130%;"><img style="width: 25px; height:25px;" src="./assets/bell.gif" /> <a style="color: #C8102E;"> {{ message.length}}</a> <a style="font-size: 80%;"> Pendiente(s)</a> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    
+    <div class="col-lg-11" style="margin-top: 11px; text-align: center;">
+        <div class="card" style="width: 100%; height: 165px;" [routerLink]="['/encuesta']">
+            <div class="card-body">
+                <div class="col-lg-2" style="text-align: center; font-size: 30px; margin-top: -4px;">
+                    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-lg-9" style="text-align: center; margin-top: -20px; color:#3F2021">
+                    <h3>
+                        Encuestas de Satisfacción
+                    </h3>
+                    <div>
+                        Califica la atención.
+                    </div>
+                    <div *ngIf="dataEncuesta" style="margin-top: 0%;">
+                        <a style="font-size: 130%;"><img style="width: 25px; height:25px;" src="./assets/bell.gif" /> <a style="color: #C8102E;"> {{ dataEncuesta.length}}</a> <a style="font-size: 80%;"> Pendiente(s)</a> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1">
+    </div>
+</div>
+
+</div>
+
+
+<style>
+.card:hover {
+  cursor: pointer;
+  background: #e9e8e8;
+  color: #3F2021;
+}
+
+.glyphicon{
+    color: #C8102E;
+}
+
+@import url("https://p.typekit.net/p.css?s=1&k=lkr2zif&ht=tk&f=24539.24540.24547&a=6178157&app=typekit&e=css");
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+.tk-sofia-pro { font-family: "sofia-pro",sans-serif; }
+
+</style>

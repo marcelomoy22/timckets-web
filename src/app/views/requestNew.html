@@ -1,0 +1,825 @@
+<div class="col-lg-12" >
+  <h1 *ngIf="identity.type=='local'" class="col-md-11" style="color: #3F2021; font-family: 'sofia-pro'; font-size: 240%; font-weight: 510">{{title}}</h1>
+  <h1 *ngIf="identity.type!='local'" style="margin-left: -15px; color:#DDCBA4; font-family: 'sofia-pro'; font-size: 240%; font-weight: 510;" class="col-md-11">{{title}}</h1>
+
+    <div class="col-md-1" style="margin-top: 10px;"  [routerLink]="['/encuesta']">
+      <img *ngIf="identity.type=='local' && dataEncuesta" style="width: 50px; height:50px;" src="./assets/bell.gif" />
+    </div>
+
+    <div class="clearfix"></div> 
+
+    <div class="card" style="width: 100%; height: 100%; margin-top: 8px; background-color:#DDCBA4; border-color: rgb(71, 71, 71)">
+      <div class="card-body">
+          <div class="row">
+
+            <div class="row">
+               <div class="col-md-12" style="align-items: flex-end;">
+                <div class="col-md-1" style="text-align:right; margin-top: 0.4%; ">
+                  <label>Filtrar:</label>
+                </div>
+                <div class="col-md-3">
+                  <input style="background-color: #e1e1e1;" type="search" class="form-control input-sm" placeholder="Busqueda" #name="ngModel" [(ngModel)]="search" (ngModelChange)="search1(search)" >
+                </div>
+                <div class="btn-group  btn_group_explicit col-md-7" style="padding-right: 0%;">
+                  <a *ngIf="table == 'original'" class="btn btn-default active" (click)="onClickdismis()">-</a>
+                  <a *ngIf="table != 'original'" class="btn btn-default" style="background-color: #e1e1e1;" (click)="onClickdismis()">-</a>
+                  <a *ngIf="table != 'original'" class="btn btn-default active" (click)="onClickmore()">+</a>
+                  <a *ngIf="table == 'original'" class="btn btn-default " style="background-color: #e1e1e1;" (click)="onClickmore()">+</a>
+              </div>
+              </div>
+              <div class="clearfix"></div>
+               </div>
+
+
+
+               <ul *ngIf="table=='original'" id="menu" style="margin-left: 1%; margin-bottom: -0.5%;">
+                <hr style="color: #707070; margin-left: -1%;" width="100%"/>
+
+                <div *ngFor="let allIsue of allIsues; let i = index" [attr.data-index]="i">
+                <li style="margin-bottom: -0.5%;">
+                  <input type="checkbox" name="list" id="nivel1-{{i+1}}"><label for="nivel1-{{i+1}}">{{allIsue.name}}</label>
+
+                  <ul class="interior">
+                    <div *ngFor="let issue of allIsue.service2[0]; let ii = index" [attr.data-index]="ii">
+                      <hr style="color: #707070;" width="98%"/>
+                        <!-- <li><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" (click)="prueba(issue)" data-toggle="modal" data-target="#exampleModal">{{issue.issue}}</label></li> -->
+                        <li style="margin-bottom: -0.5%;">
+                            <input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" >{{issue.subName}}</label>
+                           <br>
+                            <h6 style="color: rgb(104, 104, 104);">{{issue.descService}}</h6>
+                        
+                            <ul class="interior">
+                                <div *ngFor="let subcategory of issue.subcategory; let iii = index" [attr.data-index]="iii">
+                                <hr style="color: #707070;" width="98%"/>
+                                    <li *ngIf="subcategory.departments._id !='62f1a82422e803510bacee97' || (!subcategory.chatbot && subcategory.chatbot != true) " style="margin-bottom: -0.5%;"><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" (click)="onClickIssue(subcategory)" data-toggle="modal" data-target="#exampleModal"> {{subcategory.subcategory}}</label></li>
+                                    <li *ngIf="subcategory.departments._id =='62f1a82422e803510bacee97' && subcategory.chatbot && subcategory.chatbot == true " style="margin-bottom: -0.5%;"><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" (click)="onClickIssue(subcategory)" data-toggle="modal" data-target="#exampleModal2"> {{subcategory.subcategory}}</label></li>
+                                    <!-- <li><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" >{{subcategory.subcategory}}</label></li> -->
+                                    <br>
+                                    <h6 style="color: rgb(104, 104, 104);">{{subcategory.descSubcategory}} <a *ngIf="subcategory.sla || subcategory.format || subcategory.descSla">  | </a> {{subcategory.sla}} horas <a *ngIf="subcategory.descSla"> * </a> {{subcategory.descSla}}</h6>
+                                </div>
+                                </ul>
+                        
+                        </li>
+                    </div>
+                      </ul>
+
+                </li>
+                <hr style="color: #707070;" width="98%"/>
+                </div>
+                </ul>
+
+
+                <ul *ngIf="table=='segunda'" id="menu2" style="margin-left: 1%; margin-bottom: -0.5%;">
+                  <hr style="color: #707070; margin-left: -1%;" width="100%"/>
+  
+                  <div *ngFor="let allIsue of allIsues; let i = index" [attr.data-index]="i">
+                  <li style="margin-bottom: -0.5%;">
+                    <input type="checkbox" name="list" id="nivel1-{{i+1}}"><label for="nivel1-{{i+1}}">{{allIsue.name}}</label>
+  
+                    <ul class="interior" style="margin-left:2%">
+                      <div *ngFor="let issue of allIsue.service2[0]; let ii = index" [attr.data-index]="ii">
+                        <hr style="color: #707070;" width="98%"/>
+                          <!-- <li><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" (click)="prueba(issue)" data-toggle="modal" data-target="#exampleModal">{{issue.issue}}</label></li> -->
+                          <li style="margin-bottom: -0.5%;">
+                              <input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" >{{issue.subName}}</label>
+                             <br>
+                              <h6 style="color: rgb(104, 104, 104);">{{issue.descService}}</h6>
+                          
+                              <ul class="interior" style="margin-left:2%">
+                                  <div *ngFor="let subcategory of issue.subcategory; let iii = index" [attr.data-index]="iii">
+                                  <hr style="color: #707070;" width="98%"/>
+                                  <li *ngIf="subcategory.departments._id !='62f1a82422e803510bacee97' || (!subcategory.chatbot && subcategory.chatbot != true) " style="margin-bottom: -0.5%;"><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" (click)="onClickIssue(subcategory)" data-toggle="modal" data-target="#exampleModal"> {{subcategory.subcategory}}</label></li>
+                                  <li *ngIf="subcategory.departments._id =='62f1a82422e803510bacee97' && subcategory.chatbot && subcategory.chatbot == true " style="margin-bottom: -0.5%;"><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" (click)="onClickIssue(subcategory)" data-toggle="modal" data-target="#exampleModal2"> {{subcategory.subcategory}}</label></li>                                      <!-- <li><input type="checkbox" name="list" id="nivel{{1+ii+1}}-{{i+1}}"><label for="nivel{{1+ii+1}}-{{i+1}}" >{{subcategory.subcategory}}</label></li> -->
+                                      <br>
+                                      <h6 style="color: rgb(104, 104, 104);">{{subcategory.descSubcategory}} <a *ngIf="subcategory.sla || subcategory.format || subcategory.descSla">  | </a> {{subcategory.sla}} horas <a *ngIf="subcategory.descSla"> * </a> {{subcategory.descSla}}</h6>
+                                  </div>
+                                  </ul>
+                          
+                          </li>
+                      </div>
+                        </ul>
+                  </li>
+                  <hr style="color: #707070;" width="98%"/>
+                  </div>
+                  </ul>
+
+
+          </div></div></div>
+
+
+</div>
+
+<!-- Modal Estatus Extra -->
+<div class="modal fade" id="exampleModal2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="width: 70%;" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #5e5e5e; color: #ffffff;">
+        <h4 class="modal-title;" id="exampleModalLabel" style="color: rgb(255, 255, 255); position: center; left: 2%"> {{requestNew.category}} Bot,  ( Asistente virtual )</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: fixed; right: 2%; color: rgb(255, 255, 255);">
+          <span  aria-hidden="true" >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">     
+
+
+        <div class="col-md-12">
+          <textarea name="note" class="form-control" placeholder="Escribe aquí tus comentarios" rows="1" cols="1" [disabled]="true"> {{requestNew.service}},  {{requestNew.subCategory}} </textarea>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-md-12" style="margin-top: 10px;">
+          <svg style="margin-left: 15px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+            <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+          </svg>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-md-12" style="margin-top: 15px; text-align: start;">
+          <div class="col-md-8;">
+            <div style="background-color: #3f2021; position: relative; display: inline-block; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+              <p style="color: #DDCBA4;">
+                Hola, soy tu asistente virtual !, Cuéntanos, en que te puedo ayudar?
+              </p>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div *ngFor="let item of messages; let i = index">
+          <div *ngIf="item.role=='assistant'" class="col-md-12" style="margin-top: 10px; text-align: start;">
+            <div class="col-md-8">
+              <div style="background-color: #3f2021; position: relative; display: inline-block; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                <p style="color: #DDCBA4;">
+                  {{item.content}}
+                </p>
+              </div>
+              <div *ngIf="!messagesBD[i].util" class="display: inline-block; margin-right: 5px;">
+                <a style="font-size: 80%;">
+                  Te sirvio la respuesta?
+                </a>
+                <button class="btn btn-light" style="color: rgb(0, 156, 0); background-color: #dddddd; font-size: 60%;" (click)="sirvio(i, 'si')">
+                  <span class="glyphicon glyphicon-ok"></span>
+                </button>
+                <button class="btn btn-light" style="color: #C8102E; background-color: #dddddd; font-size: 60%;" (click)="sirvio(i, 'no')">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div *ngIf="item.role=='user'" class="col-md-12" style="margin-top: 10px;">
+            <div class="col-md-6"></div>
+            <div style=" text-align: end; background-color:#C8102E; position: relative; display: inline-block; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+              <p style="color: #DDCBA4;" >
+                {{item.content}}
+              </p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="col-md-11" style="margin-top: 20px;">
+          <textarea name="note" class="form-control" [(ngModel)]="note" placeholder="Escribe aquí tus comentarios" rows="3" cols="3"></textarea>
+        </div>
+        <div class="col-md-1" style="margin-top: 20px; margin-left: -30px;">
+          <button class="btn btn-light" style="color: green; background-color: #dddddd;" (click)="pregunta(note)">
+            <h2>
+              <span class="glyphicon glyphicon-send"></span>
+            </h2>
+          </button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="modal-footer">
+        <div style="margin-right: 30%;" *ngIf="messagesBD[1]">
+          <button type="button" class="btn btn-secondary" style="background-color: #C8102E; font-size: 140%;" data-toggle="modal" data-target="#exampleModal">LEVANTAR TIMCKET</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-secondary" style="background-color: #dddddd; color: #1b1b1b;" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="load==true">
+    <div id="loader-wrapper">
+      <div id="loader"><a *ngIf="functions3==true">+</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="requestNew.subCategory" class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="width: 100%;" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #5e5e5e; color: #ffffff;">
+        <h4 class="modal-title;" id="exampleModalLabel" style="color: rgb(255, 255, 255); position: fixed; left: 2%"> Nuevo Requerimiento  {{ subCategory }} </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: fixed; right: 2%; color: rgb(255, 255, 255);">
+          <span  aria-hidden="true" >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">     
+        <div class="col-md-6" style="margin-top: 15px;">
+          <label style="text-align: left; margin-top: 5px;">Servicio:</label>
+          <input type="text" #name="ngModel"  name="service" [(ngModel)]="requestNew.service" class="form-control" [disabled]="true" required>
+
+        </div>
+        <div class="col-md-6" style="margin-top: 15px;">
+          <label style="text-align: left; margin-top: 5px;">Subcategoría:</label>
+          <input type="text" #name="ngModel"  name="subCategory" [(ngModel)]="requestNew.subCategory" class="form-control" [disabled]="true" required/>
+        </div>
+        <div class="clearfix"></div>
+
+        <div *ngIf="campos.menuboards==true">
+
+        <label style="margin-top: 20px; margin-left: 15px;">Seleccione (el o los) Menuboards *</label>
+        <div class="clearfix"></div>
+
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="menuboard.promopanel" style="margin-right: 1%;">
+          <label>1- Promo panel</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="menuboard.panaderia" style="margin-right: 1%;">
+          <label>2- Panadería</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="menuboard.bebidasCalientes" style="margin-right: 1%;">
+          <label>3- Bebidas calientes</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="menuboard.babidasFrias" style="margin-right: 1%;">
+          <label>4- Bebidas frías</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="menuboard.dasayunosLunch" style="margin-right: 1%;">
+          <label>5- Desayunos|Lunch</label>
+        </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div *ngIf="campos.cantBolsasComprobantes==true">
+
+        <label style="margin-top: 20px; margin-left: 15px;">Seleccione mínimo un campo*</label>
+        <div class="clearfix"></div>
+
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="cantBolsasComprobantes.bolsas" style="margin-right: 1%;">
+          <label>100 Bolsas</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="cantBolsasComprobantes.comprobantes" style="margin-right: 1%;">
+          <label>100 Comprobantes</label>
+        </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div *ngIf="campos.numBolsaTipoCaja==true">
+        <label style="margin-top: 20px; margin-left: 15px;">Complete el No. de bolsa / tipo de cada</label>
+        <div class="clearfix"></div>
+
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+        <div class="col-md-6">
+          <label style="text-align: center;">No. de Bolsa: </label>
+          <input type="text" #name="ngModel"  name="email" [(ngModel)]="numBolsaTipoCaja.numBolsas"/>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+          <div class="col-md-3" style="margin-top: 3px;">
+            <label>Tipo Caja: </label>
+          </div>
+          <div class="col-md-5" style="margin-left: -20px;">
+            <select class="form-control" #name="ngModel" name="select" [(ngModel)]="numBolsaTipoCaja.tipoCaja">
+              <option value="">▼</option>
+              <option value="Caja-tradicional">Caja tradicional</option>
+              <option value="Brinksbox">Brinksbox</option>
+          </select>
+          </div>
+
+
+        </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div *ngIf="campos.dt==true" class="col-md-6">
+        <label style="margin-top: 20px; margin-left: 15px;">¿Se realizó el reinicio de HME de acuerdo al manual de fallas comunes en DriveThru? *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-4" style="margin-left: -20px;">
+            <select class="form-control" #name="ngModel" name="select" [(ngModel)]="dt">
+              <option value="">▼</option>
+              <option value="Si">Sí</option>
+              <option value="No">No</option>
+          </select>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.email==true" class="col-md-6">
+        <label style="margin-top: 20px; margin-left: 15px;">email *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-8">
+            <input type="text" #name="ngModel"  name="email" [(ngModel)]="email" placeholder="email" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div *ngIf="campos.pos==true">
+
+        <label style="margin-top: 20px; margin-left: 15px;">Seleccione (el o los) POS *</label>
+        <div class="clearfix"></div>
+        <div>
+          <img style="width: 400px; height: 250px;" src="./assets/pos.jpg" />
+        </div>
+        <div class="modal-header; col-md-12" style="background-color: #ecebeb; color: #1f1f1f; margin-top: 5px;">
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.fcRight" style="margin-right: 1%;">
+          <label>FC 1</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.fcLeft" style="margin-right: 1%;">
+          <label>FC 2</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.fc3" style="margin-right: 1%;">
+          <label>FC 3</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.fc4" style="margin-right: 1%;">
+          <label>FC 4</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.fc5" style="margin-right: 1%;">
+          <label>FC 5</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.dtOt" style="margin-right: 1%;">
+          <label>DT OT</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.dtOt2" style="margin-right: 1%;">
+          <label>DT OT2</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="pos.dtCashier" style="margin-right: 1%;">
+          <label>DT Cashier</label>
+        </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div *ngIf="campos.medidas==true">
+        <label style="margin-top: 20px; margin-left: 15px;">Medidas *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+          <div class="col-md-3">
+            <input type="text" #name="ngModel"  name="email" [(ngModel)]="medidas.altura" placeholder="Altura" class="form-control"/>
+          </div>
+          <div class="col-md-3">
+            <input type="text" #name="ngModel"  name="email" [(ngModel)]="medidas.ancho" placeholder="Ancho" class="form-control"/>
+          </div>
+          <div class="col-md-3">
+            <input type="text" #name="ngModel"  name="email" [(ngModel)]="medidas.profundidad" placeholder="Profundidad" class="form-control"/>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div *ngIf="campos.kds==true">
+
+        <label style="margin-top: 20px; margin-left: 15px;">Seleccione (el o los) KDS *</label>
+        <div class="clearfix"></div>
+
+        <div>
+          <img style="width: 400px; height: 250px;" src="./assets/kds.jpg" />
+        </div>
+
+        <div class="modal-header; col-md-12" style="background-color: #ecebeb; color: #1f1f1f;">
+        <div class="col-md-4">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.expo1" style="margin-right: 1%;">
+          <label>Expo - FOH</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.expo2" style="margin-right: 1%;">
+          <label>Expo - Drive Thru</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.expoDelivery" style="margin-right: 1%;">
+          <label>Expo - Delivery</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.expoFor1And2" style="margin-right: 1%;">
+          <label>Expo for 1 and 2</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.expoFor3And4" style="margin-right: 1%;">
+          <label>Expo for 3 and 4</label>
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.sandwiches" style="margin-right: 1%;">
+          <label>Sándwiches</label>
+        </div>
+        <div class="col-md-4">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.bebidasCalientes" style="margin-right: 1%;">
+          <label>Hot Beverages</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.bebidasFrias" style="margin-right: 1%;">
+          <label>Cold Beverages</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.refreshersAndBrew" style="margin-right: 1%;">
+          <label>Refresh and Bunn</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.espressoOnly" style="margin-right: 1%;">
+          <label>Espresso only</label>
+        </div>
+        <div class="col-md-3">
+          <input type="checkbox" #name="ngModel" name="5" [(ngModel)]="kds.bakeryOnly" style="margin-right: 1%;">
+          <label>Bakery only</label>
+        </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div *ngIf="campos.numReport==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Número de reporte *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="numReport" [(ngModel)]="numReport" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.numOrden==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Número de orden *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="numOrden" [(ngModel)]="numOrden" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.producto==true"  class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Producto *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-12">
+            <input type="text" #name="ngModel"  name="producto" [(ngModel)]="producto" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.lote==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Lote *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="lote" [(ngModel)]="lote" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.cantidad==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Cantidad *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="cantidad" [(ngModel)]="cantidad" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.numSerie==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Número de serie *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="numSerie" [(ngModel)]="numSerie" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.marca==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Marca *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="marca" [(ngModel)]="marca" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.nombreTimMember==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Nombre del Tim-Member *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="nombreTimMember" [(ngModel)]="nombreTimMember" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="campos.numNomina==true" class="col-md-4">
+        <label style="margin-top: 20px; margin-left: 15px;">Número de nómina *</label>
+        <div class="clearfix"></div>
+        <div class="modal-header" style="background-color: #ecebeb; color: #1f1f1f;">
+
+          <div class="col-md-11">
+            <input type="text" #name="ngModel"  name="numNomina" [(ngModel)]="numNomina" placeholder="" class="form-control"/>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+
+      <div class="col-md-12" style="margin-top: 15px;">
+        <label style="text-align: left; margin-top: 5px;">Descripción: *</label>
+        <textarea name="comentarios" #name="ngModel" name="description" [(ngModel)]="requestNew.description" class="form-control" placeholder="Escribe aquí tus comentarios" rows="10" cols="40" required></textarea>
+      </div>
+      <div class="clearfix"></div>
+      <div *ngIf="identity.type!='areaManager' && identity.upload!='si' && identity.type!='callCenter'" class="col-md-6" style="margin-top: 15px;">
+        <label style="text-align: left; margin-top: 5px;">Gerencial que reporta: *</label>
+        <input type="text" #name="ngModel"  name="subCategory" [(ngModel)]="requestNew.manager" placeholder="Nombre de quien reporta" class="form-control" required/>
+      </div>
+      <div *ngIf="identity.type=='areaManager'" class="col-md-6" style="margin-top: 15px;">
+        <label style="text-align: left; margin-top: 5px;">AM que reporta:</label>
+        <input type="text" #name="ngModel"  name="subCategory" [(ngModel)]="requestNew.manager" placeholder="Nombre de quien reporta" class="form-control" [disabled]="true" required/>
+      </div>
+
+      <div *ngIf="identity.type=='areaManager'" class="col-md-6" style="margin-top: 15px;">
+        <label style="text-align: left; margin-top: 5px;">Sucursal: *</label>
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="requestNew.reportBy" >
+          <option value="">▼</option>
+          <option *ngFor="let sucursal of sucursales; let i = index" value={{sucursal._id}}>{{sucursal.name}}</option>
+      </select>
+      </div>
+
+      <div *ngIf="identity.upload=='si' || identity.type=='callCenter'" class="col-md-6" style="margin-top: 15px;">
+        <label style="text-align: left; margin-top: 5px;">Usuario que reporta:</label>
+        <input type="text" #name="ngModel"  name="subCategory" [(ngModel)]="requestNew.manager2" placeholder="Nombre de quien reporta" class="form-control" [disabled]="true" required/>
+      </div>
+
+      <div *ngIf="identity.upload=='si' || identity.type=='callCenter'" class="col-md-6" style="margin-top: 15px;">
+        <label style="text-align: left; margin-top: 5px;">Sucursal:</label>
+        <select class="form-control" #name="ngModel" name="select" [(ngModel)]="requestNew.reportBy" >
+          <option value="">▼</option>
+          <option *ngFor="let sucursal of sucursales; let i = index" value={{sucursal._id}}>{{sucursal.name}}</option>
+      </select>
+      </div>
+
+      <div class="clearfix"></div>
+      <div class="col-md-12" style="margin-top: 22px;">
+        <label style="text-align: left; margin-top: 5px;">Anexos: <a *ngIf="campos.foto==true"> * (mínimo 1 foto)</a> <a *ngIf="campos.video==true"> * (mínimo 1 video)</a></label>
+        <div class="modal-header" style="background-color: #e9e9e9; color: #818181;">
+          <div class="col-md-12" style="margin-top: 15px;">
+            <div class="col-md-3" >
+            <input *ngIf="!fileToUpload1" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent1($event)">
+            <label *ngIf="fileToUpload1" style="text-align: left; margin-top: 5px;">{{newName1}}</label>
+              <button *ngIf="fileToUpload1" (click)="imgCancel1()" type="button" class="btn btn-secondary" > x </button>
+            </div>
+            <div *ngIf="fileToUpload1" class="col-md-3" style="margin-left: 0px;">
+              <input *ngIf="!fileToUpload2" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent2($event)">
+              <label *ngIf="fileToUpload2" style="text-align: left; margin-top: 5px;">{{newName2}}</label>
+                <button *ngIf="fileToUpload2" (click)="imgCancel2()" type="button" class="btn btn-secondary" > x </button>
+              </div>
+              <div *ngIf="fileToUpload1 && fileToUpload2" class="col-md-3" style="margin-left: 0px;">
+                <input *ngIf="!fileToUpload3" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent3($event)">
+                <label *ngIf="fileToUpload3" style="text-align: left; margin-top: 5px;">{{newName3}}</label>
+                  <button *ngIf="fileToUpload3" (click)="imgCancel3()" type="button" class="btn btn-secondary" > x </button>
+                </div>
+                <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3" class="col-md-3" style="margin-left: 0px;">
+                  <input *ngIf="!fileToUpload4" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent4($event)">
+                  <label *ngIf="fileToUpload4" style="text-align: left; margin-top: 5px;">{{newName4}}</label>
+                    <button *ngIf="fileToUpload4" (click)="imgCancel4()" type="button" class="btn btn-secondary" > x </button>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4" class="col-md-3" style="margin-top:10px">
+                    <input *ngIf="!fileToUpload5" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent5($event)">
+                    <label *ngIf="fileToUpload5" style="text-align: left; margin-top: 5px;">{{newName5}}</label>
+                      <button *ngIf="fileToUpload5" (click)="imgCancel5()" type="button" class="btn btn-secondary" > x </button>
+                    </div>
+                    <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4 && fileToUpload5" class="col-md-3" style="margin-left: 0px;margin-top:10px">
+                      <input *ngIf="!fileToUpload6" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent6($event)">
+                      <label *ngIf="fileToUpload6" style="text-align: left; margin-top: 5px;">{{newName6}}</label>
+                        <button *ngIf="fileToUpload6" (click)="imgCancel6()" type="button" class="btn btn-secondary" > x </button>
+                      </div>
+                      <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4 && fileToUpload5 && fileToUpload6" class="col-md-3" style="margin-left: 0px;margin-top:10px">
+                        <input *ngIf="!fileToUpload7" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent7($event)">
+                        <label *ngIf="fileToUpload7" style="text-align: left; margin-top: 5px;">{{newName7}}</label>
+                          <button *ngIf="fileToUpload7" (click)="imgCancel7()" type="button" class="btn btn-secondary" > x </button>
+                        </div>
+                        <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4 && fileToUpload5 && fileToUpload6 && fileToUpload7" class="col-md-3" style="margin-left: 0px;margin-top:10px">
+                          <input *ngIf="!fileToUpload8" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent8($event)">
+                          <label *ngIf="fileToUpload8" style="text-align: left; margin-top: 5px;">{{newName8}}</label>
+                            <button *ngIf="fileToUpload8" (click)="imgCancel8()" type="button" class="btn btn-secondary" > x </button>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4 && fileToUpload5 && fileToUpload6 && fileToUpload7 && fileToUpload8" class="col-md-3" style="margin-top:10px">
+                            <input *ngIf="!fileToUpload9" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent9($event)">
+                            <label *ngIf="fileToUpload9" style="text-align: left; margin-top: 5px;">{{newName9}}</label>
+                              <button *ngIf="fileToUpload9" (click)="imgCancel9()" type="button" class="btn btn-secondary" > x </button>
+                            </div>
+                            <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4 && fileToUpload5 && fileToUpload6 && fileToUpload7 && fileToUpload8 && fileToUpload9" class="col-md-3" style="margin-left: 0px;margin-top:10px">
+                              <input *ngIf="!fileToUpload10" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent10($event)">
+                              <label *ngIf="fileToUpload10" style="text-align: left; margin-top: 5px;">{{newName10}}</label>
+                                <button *ngIf="fileToUpload10" (click)="imgCancel10()" type="button" class="btn btn-secondary" > x </button>
+                              </div>
+                              <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4 && fileToUpload5 && fileToUpload6 && fileToUpload7 && fileToUpload8 && fileToUpload9 && fileToUpload10" class="col-md-3" style="margin-left: 0px;margin-top:10px">
+                                <input *ngIf="!fileToUpload11" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent11($event)">
+                                <label *ngIf="fileToUpload11" style="text-align: left; margin-top: 5px;">{{newName11}}</label>
+                                  <button *ngIf="fileToUpload11" (click)="imgCancel11()" type="button" class="btn btn-secondary" > x </button>
+                                </div>
+                                <div *ngIf="fileToUpload1 && fileToUpload2 && fileToUpload3 && fileToUpload4 && fileToUpload5 && fileToUpload6 && fileToUpload7 && fileToUpload8 && fileToUpload9 && fileToUpload10 && fileToUpload11" class="col-md-3" style="margin-left: 0px;margin-top:10px">
+                                  <input *ngIf="!fileToUpload12" type="file" placeholder="Sube imagen..." (change)="fileChangeEvent12($event)">
+                                  <label *ngIf="fileToUpload12" style="text-align: left; margin-top: 5px;">{{newName12}}</label>
+                                    <button *ngIf="fileToUpload12" (click)="imgCancel12()" type="button" class="btn btn-secondary" > x </button>
+                                  </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      </div>
+      <div class="modal-footer">
+        <label *ngIf="campos.numBolsaTipoCaja==true" class="col-md-8" style="text-align: left; font-size: 95%;"><a style="font-size: 110%; color: red;">Este servicio se bloqueara el lunes de  14:00pm a 23:59pm  y miércoles de 14:00pm a 23:59pm</a></label>
+        <button type="button" class="btn btn-secondary" style="background-color: #dddddd; color: #1b1b1b;" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" style="background-color: #C8102E; margin-right: 1.3%;"  (click)="asignar()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
+          </svg>
+          <label style="margin-top: 4%; margin-left:-4%; size: 10%;">
+            Enviar
+          </label>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="load==true">
+    <div id="loader-wrapper">
+      <div id="loader"><a *ngIf="functions3==true">+</a></div>
+    </div>
+  </div>
+</div>
+
+<style>
+    #menu * { list-style:none; color: #C8102E;}
+    #menu li{ line-height:30%;}
+    #menu input[name="list"] {position: absolute; left: -1000em}
+    #menu label{font-weight: normal}
+    #menu label:before{ content:"\025b8"; margin-right:4px;}
+    #menu input:checked ~ label:before{ content:"\025be";}
+    #menu .interior{display: none; margin-left: 2%;}
+    #menu input:checked ~ ul{display:block;}
+    
+    #menu2 * { list-style:none; color: #C8102E;}
+    #menu2 li{ line-height:30%;}
+    #menu2 input[name="list"] {position: absolute; left: -1000em}
+    #menu2 label{font-weight: normal}
+    #menu2 label:before{ content:"\025b8"; margin-right:4px;}
+    #menu2 input:checked ~ label:before{ content:"\025be";}
+    #menu2 input:checked ~ ul{display:block;}
+
+  #loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+  }
+
+  #loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #C8102E;
+    -webkit-animation: spin 2s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  #loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #eeeeee;
+    -webkit-animation: spin 3s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 3s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  #loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #C8102E;
+    -webkit-animation: spin 1.5s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 1.5s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);
+      /* IE 9 */
+      transform: rotate(0deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);
+      /* IE 9 */
+      transform: rotate(360deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);
+      /* IE 9 */
+      transform: rotate(0deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);
+      /* IE 9 */
+      transform: rotate(360deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+  }
+
+@import url("https://p.typekit.net/p.css?s=1&k=lkr2zif&ht=tk&f=24539.24540.24547&a=6178157&app=typekit&e=css");
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/5d97ff/00000000000000007735f999/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/66e20c/00000000000000007735f993/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;font-stretch:normal;
+}
+@font-face {
+font-family:"sofia-pro";
+src:url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/b718ff/00000000000000007735f98d/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+</style>
